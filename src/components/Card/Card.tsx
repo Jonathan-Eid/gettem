@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import Card from 'react-bootstrap/Card'
-import Container from 'react-bootstrap/Container'
+import Modal from 'react-bootstrap/Modal'
 import {InfoSquare, InfoCircle} from 'react-bootstrap-icons'
 
 
@@ -13,11 +13,16 @@ interface Props {
  
 const SwipeCard: FC<Props> = ({children, ...rest}) => {
 
-    return <Card className="card-has-bg" text='white' style={{ width: '18rem'}}>
+  const [show, setShow] = React.useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+    return <><Card className="card-has-bg" text='white' style={{ width: "18rem" }}>
               <Card.Img /*className="d-none" */src={process.env.PUBLIC_URL + '/imgs/raiden.jpg'} />
               <Card.ImgOverlay className="d-flex flex-column"></Card.ImgOverlay>
-              <InfoSquare size="" className="bi-info-square"> </InfoSquare>
-              <div id="cta">
+              <InfoSquare onClick={handleShow} size="" className="bi-info-square"> </InfoSquare>
+              <div onClick={handleShow} id="cta">
                   <span className="arrow primera next "></span>
                   <span className="arrow segunda next "></span>
                   <InfoCircle size="" className="bi-info-circle"></InfoCircle>
@@ -30,7 +35,23 @@ const SwipeCard: FC<Props> = ({children, ...rest}) => {
                 YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
                 YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA </Card.Text>
               </Card.Body> 
-            </Card> 
+            </Card>
+
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Modal heading</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={handleClose}>
+                  Save Changes
+                </Button>
+              </Modal.Footer>
+            </Modal>
+            </>
           
 } 
 
