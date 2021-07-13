@@ -1,24 +1,24 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Card from '../../components/Card';
+import Navbar from '.';
 
 export default {
-  title: 'Example/Card',
-  component: Card,
+  title: 'Gettem/Navbar',
+  component: Navbar, 
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-} as ComponentMeta<typeof Card>;
+} as ComponentMeta<typeof Navbar>;
 
-const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
+const Template: ComponentStory<typeof Navbar> = (args) => <Navbar {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {};
 
 // export const Secondary = Template.bind({});
 // Secondary.args = {
-//   label: 'Button',
+//   label: 'Button', 
 // };
 
 // export const Large = Template.bind({});
