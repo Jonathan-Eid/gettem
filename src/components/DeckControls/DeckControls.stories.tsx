@@ -1,17 +1,17 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import Navbar from '.';
+import DeckControls from '.';
 
 export default {
-  title: 'Gettem/Navbar',
-  component: Navbar, 
+  title: 'Gettem/DeckControls',
+  component: DeckControls, 
   argTypes: {
     backgroundColor: { control: 'color' },
   },
-} as ComponentMeta<typeof Navbar>;
+} as ComponentMeta<typeof DeckControls>;
 
-const Template: ComponentStory<typeof Navbar> = (args) => <Navbar {...args} />;
+const Template: ComponentStory<typeof DeckControls> = (args) => <DeckControls {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {};

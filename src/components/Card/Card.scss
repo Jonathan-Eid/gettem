@@ -1,25 +1,30 @@
-.card{
+ @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+ .card{
+    position: relative;  
     border: none;
     transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
     overflow:hidden;
     border-radius:20px;
-    min-width:500px;
-    min-height: 500px;
-     box-shadow: 0 0 12px 0 rgba(0,0,0,0.2);
-    //  padding-bottom: 100%;
+    // width:500px;
+    // min-height: 500px;
+     width: 30vmax;
+     box-shadow: 0 0 12px 0 rgba(0,0,0,0.2); 
+     padding-bottom: 40vmax;
     // position: absolute;
   
-   @media (max-width: 768px) {
-    min-width:350px;
-    // min-height: 350px;
+  //  @media (max-width: 768px) {
+  //   // min-width:350px;
+  //   // min-height: 350px;
+  //   padding-bottom: 25vw;
+  //   width: 25vw;
 
-  }
+  // }
   
-  @media (max-width: 420px) {
-    min-width:300px;
-    // min-height: 300px;
+  // @media (max-width: 420px) {
+  //   min-width:300px;
+  //   // min-height: 300px;
 
-  }
+  // }
   
   &:after{
     padding-bottom: 100%;
@@ -63,17 +68,17 @@
     //  z-index: 10;
      transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
      position: absolute;
-     @media (max-width: 768px) {
-      margin-top: 100%;
-      // min-height: 350px;
-  
-    }
+      @media (max-width: 768px) {
+        margin-top: 100%;
+        // min-height: 350px;
     
-    @media (max-width: 420px) {
-      margin-top: 100%;
-      // min-height: 300px;
-  
-    }
+      }
+      
+      @media (max-width: 420px) {
+        margin-top: 100%;
+        // min-height: 300px;
+    
+      }
   }
    &:hover {
      .card-body{
@@ -113,7 +118,7 @@
 
   .bi-info-square{
     position: absolute;
-    width: 50px;
+    font-size: 50px;
     bottom: 17%;
     right: 2%;
     z-index: 10;
@@ -127,11 +132,17 @@
     }
   }
 
+  @-moz-document url-prefix(){
+    body {
+        color: #000;
+    }
+  }
+
  
 
   &:hover {
       .bi-info-square{
-        width: 70px;
+        font-size: 70px;
         bottom: 16%;
         right: 2%;
           transition: all 325ms ease-in-out, left 325ms ease-in-out;

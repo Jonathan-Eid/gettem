@@ -16,12 +16,12 @@ const SwipeCard: FC<Props> = ({children, ...rest}) => {
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => setShow(true); 
 
-    return <><Card className="card-has-bg" text='white' style={{ width: "18rem" }}>
+    return <><Card className="card-has-bg" text='white'>
               <Card.Img /*className="d-none" */src={process.env.PUBLIC_URL + '/imgs/raiden.jpg'} />
-              <Card.ImgOverlay className="d-flex flex-column"></Card.ImgOverlay>
-              <InfoSquare onClick={handleShow} size="" className="bi-info-square"> </InfoSquare>
+              <Card.ImgOverlay></Card.ImgOverlay> 
+              <i onClick={handleShow} className="bi-info-square"> </i> 
               <div onClick={handleShow} id="cta">
                   <span className="arrow primera next "></span>
                   <span className="arrow segunda next "></span>
