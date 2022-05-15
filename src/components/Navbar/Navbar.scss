@@ -79,6 +79,8 @@ i {
 	margin-top: 10px;
 }
 .hori-selector .right,
+
+//media
 .hori-selector .left{
 	position: absolute;
 	width: 25px;
@@ -148,10 +150,14 @@ i {
 	.hori-selector .left,
 	.hori-selector .right{
 		right: 10px;
+		background-color: #5161ce;
+
 	}
 	.hori-selector .left{
 		top: -25px;
 		left: auto;
+		background-color: #5161ce;
+
 	}
 	.hori-selector .right{
 		bottom: -25px;

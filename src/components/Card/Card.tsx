@@ -22,16 +22,20 @@ const SwipeCard: FC<Props> = ({children, ...rest}) => {
               <Card.Img /*className="d-none" */src={process.env.PUBLIC_URL + '/imgs/raiden.jpg'} />
               <Card.ImgOverlay></Card.ImgOverlay> 
               <i onClick={handleShow} className="bi-info-square"> </i> 
-              <div onClick={handleShow} id="cta">
-                  <span className="arrow primera next "></span>
-                  <span className="arrow segunda next "></span>
-                  <InfoCircle size="" className="bi-info-circle"></InfoCircle>
-              </div>
+              {/* <div onClick={handleShow} id="cta">
+                    <span className="arrow primera next "></span>
+                    <span className="arrow segunda next "></span>
+                    
+                  </div> */}
               <Card.Body>
-                <Card.Subtitle className="mb-2 small">About Me</Card.Subtitle>
-                <Card.Title className="mt-0"><a className="text-white" href="#">Jonathan Eid</a></Card.Title>
+                <Card.Subtitle className="mb-2 small">About Me 
+                </Card.Subtitle>
+                <Card.Title className="mt-0"><a className="text-white" href="#">Jonathan Eid</a>
+                <InfoCircle onClick={handleShow} size="22px" className="bi-info-circle"></InfoCircle>
+
+                </Card.Title>
                 <Card.Text>YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
-                YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
+                YADA YADA  YADA YADA YADA YADA YADA YADA YADA YADA YADA
                 YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
                 YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA </Card.Text>
               </Card.Body> 

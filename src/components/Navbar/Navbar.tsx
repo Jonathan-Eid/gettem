@@ -9,10 +9,6 @@ import './Navbar.scss'
 interface Props {
     // any props that come into the component
 }
-
-
-
-
  
 const NavBar: FC<Props> = ({children, ...rest}) => {
 
