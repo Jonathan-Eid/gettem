@@ -9,24 +9,21 @@ import './Card.scss'
 
 interface Props {
     // any props that come into the component
+    index: number 
 }
  
-const SwipeCard: FC<Props> = ({children, ...rest}) => {
+const SwipeCard: FC<Props> = ({children,  ...props}) => {
 
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true); 
 
-    return <><Card className="card-has-bg" text='white'>
-              <Card.Img /*className="d-none" */src={process.env.PUBLIC_URL + '/imgs/raiden.jpg'} />
-              <Card.ImgOverlay></Card.ImgOverlay> 
-              <i onClick={handleShow} className="bi-info-square"> </i> 
-              {/* <div onClick={handleShow} id="cta">
-                    <span className="arrow primera next "></span>
-                    <span className="arrow segunda next "></span>
-                    
-                  </div> */}
+  const index = props.index
+
+    return <><Card className="card-has-bg" text='white' >
+              <Card.Img src={process.env.PUBLIC_URL + '/imgs/raiden.jpg'} />
+              <Card.ImgOverlay></Card.ImgOverlay>  
               <Card.Body>
                 <Card.Subtitle className="mb-2 small">About Me 
                 </Card.Subtitle>
@@ -38,7 +35,9 @@ const SwipeCard: FC<Props> = ({children, ...rest}) => {
                 YADA YADA  YADA YADA YADA YADA YADA YADA YADA YADA YADA
                 YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
                 YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA </Card.Text>
-              </Card.Body> 
+              </Card.Body>
+              <i onClick={handleShow} className="bi-info-square"> </i>  
+ 
             </Card>
 
             <Modal show={show} onHide={handleClose}>
