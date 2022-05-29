@@ -28,7 +28,7 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
                 <Card.Subtitle className="mb-2 small">About Me 
                 </Card.Subtitle>
                 <Card.Title className="mt-0"><a className="text-white" href="#">Jonathan Eid</a>
-                <InfoCircle onClick={handleShow} size="22px" className="bi-info-circle"></InfoCircle>
+                <InfoCircle onTouchEnd={handleShow} onClick={handleShow} size="22px" className="bi-info-circle"></InfoCircle>
 
                 </Card.Title>
                 <Card.Text>YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
@@ -36,7 +36,7 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
                 YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
                 YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA </Card.Text>
               </Card.Body>
-              <i onClick={handleShow} className="bi-info-square"> </i>  
+              <i onClick={handleShow} onTouchEnd={handleShow} className="bi-info-square"> </i>  
  
             </Card>
 
