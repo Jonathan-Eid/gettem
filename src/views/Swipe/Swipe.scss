@@ -1,0 +1,25 @@
+.swipe{
+
+    position: absolute;
+
+
+    margin-top: 40vmax !important; 
+
+    // width: 30vw !important;
+
+    @media (max-width: 576px) {
+
+      margin-top: 77vmax !important; 
+
+      width: 100%;
+      margin-left: 0.8vmax;
+  
+  
+    }
+    
+  }
+
+
+.deck-container{
+  z-index: -10 !important;
+}
