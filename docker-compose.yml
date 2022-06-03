@@ -1,0 +1,36 @@
+version: "3"
+
+
+services:
+  gettem:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+
+  strapi:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: gettem
+      DATABASE_HOST: localhost
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: juna
+      DATABASE_PASSWORD: gettem
+    volumes:
+      - ./app:/srv/app
+    ports:
+      - '1337:1337'
+
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: gettem
+      POSTGRES_USER: juna
+      POSTGRES_DB: gettem
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data

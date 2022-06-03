@@ -1,0 +1,9 @@
+FROM node:14-alpine
+
+
+COPY . .
+RUN npm i strapi
+RUN yarn
+
+EXPOSE 1337
+CMD [ "npx","strapi","develop" ]
