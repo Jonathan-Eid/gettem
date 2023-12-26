@@ -1,6 +1,5 @@
 version: "3"
 
-
 services:
   gettem:
     build: 
@@ -16,15 +15,16 @@ services:
     environment:
       DATABASE_CLIENT: postgres
       DATABASE_NAME: gettem
-      DATABASE_HOST: localhost
+      DATABASE_HOST: postgres
       DATABASE_PORT: 5432
       DATABASE_USERNAME: juna
       DATABASE_PASSWORD: gettem
     volumes:
-      - ./app:/srv/app
+      - ./backend:/app
     ports:
       - '1337:1337'
-
+    depends_on:
+      - postgres
 
   postgres:
     image: postgres
