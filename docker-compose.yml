@@ -7,6 +7,15 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - '3000:3000'
+    volumes:
+       - ./frontend:/gettem
+       - /node_modules
+    environment:
+       - CHOKIDAR_USEPOLLING=true
+    command: sh -c "
+        npm rebuild node-sass
+        && yarn; yarn start
+      "
 
   strapi:
     build: 

@@ -31,8 +31,8 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
                 <InfoCircle onTouchEnd={handleShow} onClick={handleShow} size="22px" className="bi-info-circle"></InfoCircle>
 
                 </Card.Title>
-                <Card.Text>YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
-                YADA YADA  YADA YADA YADA YADA YADA YADA YADA YADA YADA
+                <Card.Text> YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
+                YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
                 YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
                 YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA </Card.Text>
               </Card.Body>
