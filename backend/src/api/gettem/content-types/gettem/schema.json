@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gettems",
+  "info": {
+    "singularName": "gettem",
+    "pluralName": "gettems",
+    "displayName": "gettem",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "length_of_read": {
+      "type": "string"
+    },
+    "card": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::card.card",
+      "inversedBy": "gettems"
+    }
+  }
+}

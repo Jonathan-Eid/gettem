@@ -14,8 +14,7 @@ services:
        - CHOKIDAR_USEPOLLING=true
     command: sh -c "
         npm rebuild node-sass
-        && yarn; yarn start
-      "
+        && yarn; yarn start"
 
   strapi:
     build: 
