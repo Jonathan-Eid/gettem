@@ -1,15 +1,18 @@
 import React, { FC } from 'react'
 import Card from 'react-bootstrap/Card'
 import Modal from 'react-bootstrap/Modal'
-import {InfoSquare, InfoCircle} from 'react-bootstrap-icons'
+import {InfoSquare, InfoCircle, Images} from 'react-bootstrap-icons'
 
 
 import Button from 'react-bootstrap/Button'
-import './Card.scss'
+import './SwipeCard.scss'
+import { Carousel } from 'react-bootstrap'
+import { kMaxLength } from 'buffer'
 
 interface Props {
     // any props that come into the component
-    index: number 
+    index: number
+    card: any 
 }
  
 const SwipeCard: FC<Props> = ({children,  ...props}) => {
@@ -20,31 +23,48 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
   const handleShow = () => setShow(true); 
 
   const index = props.index
+  const card = props.card.attributes
+  const card_images = card.images.data
+  // console.log(card)
 
-    return <><Card className="card-has-bg" text='white' >
-              <Card.Img src={process.env.PUBLIC_URL + '/imgs/raiden.jpg'} />
+    return <>
+            <Card className="card-has-bg" text='white' >
+              <Card.Img src={"http://localhost:1337"+card_images[0].attributes.formats.large.url} />
               <Card.ImgOverlay></Card.ImgOverlay>  
               <Card.Body>
-                <Card.Subtitle className="mb-2 small">About Me 
+                <Card.Subtitle className="mb-2 small">{card.subtitle}
                 </Card.Subtitle>
-                <Card.Title className="mt-0"><a className="text-white" href="#">Jonathan Eid</a>
+                <Card.Title className="mt-0"><a className="text-white" href="#">{card.name}</a>
                 <InfoCircle onTouchEnd={handleShow} onClick={handleShow} size="22px" className="bi-info-circle"></InfoCircle>
 
                 </Card.Title>
-                <Card.Text> YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
-                YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
-                YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA
-                YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA YADA </Card.Text>
+                <Card.Text>{card.description}</Card.Text>
               </Card.Body>
               <i onClick={handleShow} onTouchEnd={handleShow} className="bi-info-square"> </i>  
  
             </Card>
 
+              <Carousel>
+                  {card_images.map((image:any,i:number) => {
+                    <Carousel.Item>
+                      <img
+                        className="d-block w-100"
+                        src={"http://localhost:1337"+image.attributes.formats.large.url}
+                      />
+                    </Carousel.Item>
+                  })}
+                </Carousel>
+            
+
             <Modal show={show} onHide={handleClose}>
               <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Title>{card.name}</Modal.Title>
+            </Modal.Header>
+
+              <Modal.Body>
+                
+                {card.description}
+              </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                   Close
@@ -54,6 +74,8 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
                 </Button>
               </Modal.Footer>
             </Modal>
+
+            
             </>
           
 } 

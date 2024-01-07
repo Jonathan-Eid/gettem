@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import Card from '../../components/Card'
+import SwipeCard from '../../components/Card'
 import DeckControls from '../../components/DeckControls'
 import TinderCard from 'react-tinder-card'
 import './Swipe.scss'
@@ -19,7 +19,6 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
     useEffect( () => {
   
         getCards().then(data => {
-            console.log(data)
             setCards(data.data)
         })
     
@@ -27,15 +26,13 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
     
 
 
-    const objs = [0,1,2,3,4,5,6]
-
-
     return <div className="justify-content-center flex-column d-flex" style={{justifyContent: 'center', justifyItems: 'center', alignItems: 'center', position: 'relative'}} >
             
-                {objs.map((obj,i) => {
+                {cards.map((card,i) => {
+                    // console.log(card)
                     return <TinderCard className='swipe'>
-                                <Card index={i}>
-                                </Card>
+                                <SwipeCard card={card} index={i}>
+                                </SwipeCard>
                             </TinderCard>
                 })}
                 
