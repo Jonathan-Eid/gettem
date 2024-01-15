@@ -16,7 +16,7 @@ interface Props {
  
 const DeckControls: FC<Props> = ({children, ...rest}) => {
 
-    return <div className="bg-white p-2 rounded deck d-flex justify-content-center"> 
+    return <div className="btn-container p-2 rounded deck d-flex justify-content-center"> 
       {/* <!-- xl circle buttons--> */}
       <Button className="btn-success btn-circle btn-circle-xl m-1"><ArrowCounterclockwise></ArrowCounterclockwise></Button>
       <span className="btn-spacer" ></span>

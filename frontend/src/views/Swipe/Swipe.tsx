@@ -5,7 +5,6 @@ import TinderCard from 'react-tinder-card'
 import './Swipe.scss'
 import { getCards } from '../../api/strapi'
 
-
 interface Props {
     // any props that come into the component
 }
@@ -23,11 +22,8 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
         })
     
     }, [])
-    
-
 
     return <div className="justify-content-center flex-column d-flex" style={{justifyContent: 'center', justifyItems: 'center', alignItems: 'center', position: 'relative'}} >
-            
                 {cards.map((card,i) => {
                     // console.log(card)
                     return <TinderCard className='swipe'>
@@ -40,6 +36,7 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
                         <DeckControls>  
                         </DeckControls>
                     </div>
+                    
                     
                    
                 
