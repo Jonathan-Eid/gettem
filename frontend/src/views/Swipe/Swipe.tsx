@@ -23,16 +23,20 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
     
     }, [])
 
-    return <div className="justify-content-center flex-column d-flex" style={{justifyContent: 'center', justifyItems: 'center', alignItems: 'center', position: 'relative'}} >
-                {cards.map((card,i) => {
-                    // console.log(card)
-                    return <TinderCard className='swipe'>
-                                <SwipeCard card={card} index={i}>
-                                </SwipeCard>
-                            </TinderCard>
-                })}
+    return <div className="justify-content-center flex-column d-flex swipe-container" style={{justifyItems: 'center', alignItems: 'center'}} >
+
+                <div className='card-container'>
+                    {cards.map((card,i) => {
+                        // console.log(card)
+                        return <TinderCard className='swipe'>
+                                    <SwipeCard card={card} index={i}>
+                                    </SwipeCard>
+                                </TinderCard>
+                    })}
+                </div>
                 
-                    <div className='deck-container fixed-bottom'>
+                
+                    <div className='deck-container'>
                         <DeckControls>  
                         </DeckControls>
                     </div>

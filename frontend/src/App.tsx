@@ -20,7 +20,7 @@ function App() {
         <Navbar></Navbar>
       </header>
       <body>
-        <canvas style={{position:"absolute", zIndex: -5}} ></canvas>
+        <canvas style={{position:"absolute"}} ></canvas>
         <Swipe></Swipe>
       </body>
     </div>

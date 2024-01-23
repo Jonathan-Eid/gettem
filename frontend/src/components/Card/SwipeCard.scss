@@ -3,42 +3,26 @@
     border: none;
     transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
     overflow:hidden;
-    border-radius:20px;
+    position: relative;
+    background-color: #fff;
+    width: 80vw;
+    max-width: 400px;
+    height: 70vh;
+    max-height: 650px;
+    box-shadow: 0px 0px 60px 0px rgba(0,0,0,0.30);
+    border-radius: 20px !important;
+    background-size: cover;
+    background-position: center;
     // width:500px;
     // min-height: 500px;
     //  width: 30vmax;
-     box-shadow: 0 0 12px 0 rgba(0,0,0,0.2); 
-    padding-bottom: 34em;
-    top: 8vh;
-    // height: auto !important;
-    // display: flex;
-    // padding-right: 37vw;
-    // padding-top: 50vw;
-    // position: absolute;
-    // margin: -90% !important;
-    // min-height : 80vh !important;
-    // min-width : 50vh !important;
-    // top: -300px;
-    // width: 50% !important;
-  
-   @media (max-width: 576px) {
-    // min-width:350px;
-    // min-height: 350px;
-    padding-bottom: 160%;
-    // height: 100%; 
-    width: 98%;
-    margin-top: 15px; 
+    box-shadow: 0 0 12px 0 rgba(0,0,0,0.2); 
+    // padding-bottom: 34em;
 
+  
 
-  }
   
-  @media (max-width: 375px) {
-    margin-top: 20px; 
-    padding-bottom: 140%;
-    // height: 100%; 
-    width: 100%;
-  }
-  
+
   &:after{
     padding-bottom: 100%;
   }
@@ -76,41 +60,21 @@
     }
   }
    .card-subtitle{color:orange}
-   .card-text{
-     position: relative;
-    //  margin-top: 75%;
-    //  bottom: -10em; 
-
-   }
+   
    .card-body{ 
-     margin-top: 100%;
-    //  z-index: 10;
      transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
-     position: absolute;
-      @media (max-width: 768px) {
-        margin-top: 100%;
-        // min-height: 350px;
-    
-      }
-      
-      @media (max-width: 420px) {
-        margin-top: 100%;
-        // min-height: 300px;
-    
-      }
+     position: relative;
+
   }
    &:hover {
      .card-body{ 
-       margin-top:98%; 
        transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
        @media (max-width: 768px) {
-        margin-top: 95%;
         // min-height: 350px;
     
       }
       
       @media (max-width: 420px) {
-        margin-top: 95%;
         // min-height: 300px;
     
       }

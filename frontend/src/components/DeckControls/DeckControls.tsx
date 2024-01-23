@@ -18,11 +18,11 @@ const DeckControls: FC<Props> = ({children, ...rest}) => {
 
     return <div className="btn-container p-2 rounded deck d-flex justify-content-center"> 
       {/* <!-- xl circle buttons--> */}
-      <Button className="btn-success btn-circle btn-circle-xl m-1"><ArrowCounterclockwise></ArrowCounterclockwise></Button>
+      <Button className="btn-success btn-circle-xl m-1"><ArrowCounterclockwise></ArrowCounterclockwise></Button>
       <span className="btn-spacer" ></span>
-      <Button className="btn-primary btn-circle btn-circle-xl m-1"><ChatLeftText></ChatLeftText></Button>
+      <Button className="btn-primary btn-circle-xl m-1"><ChatLeftText></ChatLeftText></Button>
       <span className="btn-spacer" ></span>
-      <Button className="btn-info btn-circle btn-circle-xl m-1"><ChevronDoubleRight></ChevronDoubleRight></Button>
+      <Button className="btn-info btn-circle-xl m-1"><ChevronDoubleRight></ChevronDoubleRight></Button>
     </div>
 
 

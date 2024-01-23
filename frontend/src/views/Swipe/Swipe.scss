@@ -3,19 +3,20 @@
     position: absolute;
 
 
-    margin-top: 29em !important; 
-
-    width: 55vh !important;
-
-    @media (max-width: 576px) {
-
-      margin-top: 77vmax !important; 
-
-      width: 100%;
-      margin-left: 0.8vmax;
-  
-  
-    }
     
   }
 
+
+
+
+  .card-container {
+    width: 100vw;
+    max-width: 400px;
+    height: 70vh;
+    max-height: 650px;
+    margin-top: 10vh;
+  }
+
+  .deck-container {
+    z-index: 0;
+  }

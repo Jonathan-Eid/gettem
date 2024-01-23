@@ -44,7 +44,7 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
  
             </Card>
 
-              <Carousel>
+              {/* <Carousel>
                   {card_images.map((image:any,i:number) => {
                     <Carousel.Item>
                       <img
@@ -53,7 +53,7 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
                       />
                     </Carousel.Item>
                   })}
-                </Carousel>
+                </Carousel> */}
             
 
             <Modal show={show} onHide={handleClose}>

@@ -34,11 +34,12 @@ function useAnimatePetal(){
         })
     
         let mouseX = 0
-        // function touchHandler(e:any) {
-        //   mouseX = (e.clientX || e.touches[0].clientX) / window.innerWidth
-        // }
-        // window.addEventListener('mousemove', touchHandler)
-        // window.addEventListener('touchmove', touchHandler)
+        function touchHandler(e:any) {
+          mouseX = (e.clientX ) / window.innerWidth
+          // || e.touches[0].clientX
+        }
+        window.addEventListener('mousemove', touchHandler)
+        window.addEventListener('touchmove', touchHandler)
     
         // Petal class
         class Petal {
