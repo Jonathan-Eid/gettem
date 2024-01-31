@@ -53,7 +53,7 @@ const NavBar: FC<Props> = ({children, ...rest}) => {
     },[])
     
 
-    return <Navbar expand="lg" className="navbar-default navbar-mainbg">
+    return <Navbar expand="lg" style={{position: "fixed"}} className="navbar-default navbar-mainbg">
     <Navbar.Brand className="navbar-logo" href="#">
       <img
         src="./imgs/logo.png"

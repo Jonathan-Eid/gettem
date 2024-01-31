@@ -1,8 +1,16 @@
 .swipe{
 
     position: absolute;
+    overflow: hidden;
 
+    
+  }
 
+  .swipe-container{
+
+    width: 100vw;
+    min-height: 100vh;
+    overflow: hidden;
     
   }
 
@@ -14,9 +22,81 @@
     max-width: 400px;
     height: 70vh;
     max-height: 650px;
-    margin-top: 10vh;
   }
 
   .deck-container {
     z-index: 0;
   }
+
+  .btn-circle-xl {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 1.3rem;
+    line-height: 45px;
+    text-align: center;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .btn-spacer{
+    padding-left: (1rem * 3) !important;
+
+    @media (max-width: 576px) {
+      padding-left: (1rem * .5) !important;
+      // min-height: 350px;
+  
+    }
+    
+    @media (max-width: 420px) {
+      padding-left: (1rem * .5) !important;
+      // min-height: 300px;
+  
+    }
+  }
+
+  .deck{
+    // width: 100vw;
+    @media (max-width: 576px) {
+      width: 100vw;
+    }
+  }
+  
+  .btn-lightpink {
+    margin: 10;
+    overflow-wrap: break-word;
+    color: black;
+    background-color: lightpink;
+    box-shadow: 2px 2px 6px black;
+  }
+
+
+  .btn-lightpink:focus {
+    box-shadow: 2px 2px 6px black;
+  }
+
+  .btn-lightpink:active {
+    background-color: rgb(235, 159, 170);
+    box-shadow: 2px 2px 6px white;
+  }
+
+
+
+
+  .btn-lavenderblush {
+    margin: 10;
+    overflow-wrap: break-word;
+    color: black;
+    background-color: lavenderblush;
+    box-shadow: 2px 2px 6px black;
+  }
+
+  .btn-lavenderblush:focus {
+    box-shadow: 2px 2px 6px black;
+  }
+
+  .btn-lavenderblush:active {
+    background-color: rgb(235, 215, 221);
+    box-shadow: 2px 2px 6px white;
+  }
+  

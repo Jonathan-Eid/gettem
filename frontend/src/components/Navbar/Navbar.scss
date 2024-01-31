@@ -10,6 +10,7 @@ body{
 i {
 	margin-right: 10px;
 }
+
 /*----------multi-level-accordian-menu------------*/
 .nav-link:hover {
 	transform: scale(1.1);
@@ -23,7 +24,8 @@ i {
 	background: linear-gradient(180deg, rgba(121,0,224,1) 0%, rgba(140,95,191,1) 100%, rgba(50,0,120,1) 100%);
 	padding: 0px;
 	border-bottom: 4px solid rgba(255, 255, 255, 0.63);
-	// border-bottom: 4px solid #13172e;
+	z-index: 1000;
+	width: 100vw;
 
 }
 #navbarSupportedContent{
@@ -163,14 +165,10 @@ i {
 	.hori-selector .left,
 	.hori-selector .right{
 		right: 10px;
-		background-color: #5161ce;
-
 	}
 	.hori-selector .left{
 		top: -25px;
 		left: auto;
-		background-color: #5161ce;
-
 	}
 	.hori-selector .right{
 		bottom: -25px;

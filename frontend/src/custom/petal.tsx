@@ -1,3 +1,6 @@
+// Animation source
+// https://codepen.io/rudtjd2548/pen/qBpVzxP
+
 import { useEffect } from "react"
 
 function useAnimatePetal(){
@@ -5,9 +8,8 @@ function useAnimatePetal(){
     useEffect( () => {
   
         const canvas = document.querySelector('canvas')
-        const header = document.querySelector('header')
         canvas!.width = window.innerWidth
-        canvas!.height = window.innerHeight- header!.clientHeight 
+        canvas!.height = window.innerHeight
         const ctx = canvas!.getContext('2d')
     
         const TOTAL = 250 
@@ -30,13 +32,18 @@ function useAnimatePetal(){
     
         window.addEventListener('resize', () => {
           canvas!.width = window.innerWidth
-          canvas!.height = window.innerHeight- header!.clientHeight 
+          canvas!.height = window.innerHeight
         })
     
         let mouseX = 0
         function touchHandler(e:any) {
-          mouseX = (e.clientX ) / window.innerWidth
-          // || e.touches[0].clientX
+
+          if (e.touches){ 
+            mouseX = (e.touches[0].clientX) / window.innerWidth
+          }else if (e.clientX){
+            mouseX = (e.clientX) / window.innerWidth
+          }
+          
         }
         window.addEventListener('mousemove', touchHandler)
         window.addEventListener('touchmove', touchHandler)

@@ -29,8 +29,6 @@
 }
 
 
-
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -39,3 +37,21 @@
     transform: rotate(360deg);
   }
 }
+
+/* #root {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+
+}
+
+
+#root>div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} */
