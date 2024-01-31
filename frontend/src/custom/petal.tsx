@@ -5,9 +5,9 @@ function useAnimatePetal(){
     useEffect( () => {
   
         const canvas = document.querySelector('canvas')
-        const body = document.querySelector('body')
+        const header = document.querySelector('header')
         canvas!.width = window.innerWidth
-        canvas!.height = window.innerHeight-63
+        canvas!.height = window.innerHeight- header!.clientHeight 
         const ctx = canvas!.getContext('2d')
     
         const TOTAL = 250 
@@ -30,7 +30,7 @@ function useAnimatePetal(){
     
         window.addEventListener('resize', () => {
           canvas!.width = window.innerWidth
-          canvas!.height = window.innerHeight-65
+          canvas!.height = window.innerHeight- header!.clientHeight 
         })
     
         let mouseX = 0

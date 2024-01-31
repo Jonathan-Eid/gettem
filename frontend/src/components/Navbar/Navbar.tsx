@@ -54,7 +54,15 @@ const NavBar: FC<Props> = ({children, ...rest}) => {
     
 
     return <Navbar expand="lg" className="navbar-default navbar-mainbg">
-    <Navbar.Brand className="navbar-logo" href="#">Navbar</Navbar.Brand>
+    <Navbar.Brand className="navbar-logo" href="#">
+      <img
+        src="./imgs/logo.png"
+        width="300"
+        height="auto"
+        className="d-inline-block align-top"
+        alt="React Bootstrap logo"
+      />
+    </Navbar.Brand>
     <Navbar.Toggle data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"/>
     <Navbar.Collapse className="collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">

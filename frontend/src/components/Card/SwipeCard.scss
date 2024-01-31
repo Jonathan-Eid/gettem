@@ -65,19 +65,11 @@
      transition: all 500ms cubic-bezier(0.19, 1, 0.22, 1);
      position: relative;
 
+
   }
    &:hover {
      .card-body{ 
-       transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
-       @media (max-width: 768px) {
-        // min-height: 350px;
-    
-      }
-      
-      @media (max-width: 420px) {
-        // min-height: 300px;
-    
-      }
+       transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1)
     
      }
 
@@ -89,6 +81,14 @@
     transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
   //  background: rgb(35,79,109); 
   background: linear-gradient(180deg, rgba(35,79,109,0.3785889355742297) 80%, rgba(69,95,113,1) 100%);
+  }
+
+  .card-text{
+    text-overflow: ellipsis;
+
+    /* Required for text-overflow to do anything */
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .card-img{
@@ -213,25 +213,37 @@ background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9
 
 }
 
-
+.modal-width {
+  width: 100vw;
+  max-width: 1000px;
+}
 
 .carousel{
   width: 100vw;
-  max-width: 400px;
-  height: 500px;
+  max-width: 600px;
+  height: 700px;
   margin: auto;
 
 }
 
 .carousel-item{
   width: 100vw;
-  max-width: 400px;
-  height: 500px;
+  max-width: 600px;
+  height: 700px;
 
 }
 
 .carousel-img{
   width: 100vw;
-  max-width: 400px;
-  height: 500px;
+  max-width: 600px;
+  height: 700px;
+}
+
+
+.modal{
+
+  .modal-header{
+    background-color: pink;
+  }
+
 }

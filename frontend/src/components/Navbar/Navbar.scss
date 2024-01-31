@@ -20,8 +20,11 @@ i {
 	color: #fff;
 }
 .navbar-mainbg{
-	background-color: #5161ce;
+	background: linear-gradient(180deg, rgba(121,0,224,1) 0%, rgba(140,95,191,1) 100%, rgba(50,0,120,1) 100%);
 	padding: 0px;
+	border-bottom: 4px solid rgba(255, 255, 255, 0.63);
+	// border-bottom: 4px solid #13172e;
+
 }
 #navbarSupportedContent{
 	overflow: hidden;
@@ -109,7 +112,7 @@ i {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #5161ce;
+    // background-color: #5161ce;
 }
 .hori-selector .right:before{
 	bottom: 0;
