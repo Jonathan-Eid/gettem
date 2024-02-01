@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import Card from 'react-bootstrap/Card'
 import Modal from 'react-bootstrap/Modal'
 import {InfoSquare, InfoCircle, Images} from 'react-bootstrap-icons'
+import Markdown from 'react-markdown'
 
 
 import Button from 'react-bootstrap/Button'
@@ -38,7 +39,9 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
                 <InfoCircle onTouchEnd={handleShow} onClick={handleShow} size="22px" className="bi-info-circle"></InfoCircle>
 
                 </Card.Title>
-                <Card.Text>{card.description}</Card.Text>
+                <Card.Text>
+                      {card.description}
+                  </Card.Text>
               </Card.Body>
               <i onClick={handleShow} onTouchEnd={handleShow} className="bi-info-square"> </i>  
  
@@ -71,9 +74,10 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
                     </Carousel.Item>
                   })} 
                   
-                </Carousel>
-                
-                {card.description}
+                </Carousel> 
+                <Markdown>
+                  {card.description}
+                </Markdown>
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>

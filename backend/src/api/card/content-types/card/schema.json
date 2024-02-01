@@ -15,9 +15,6 @@
     "name": {
       "type": "string"
     },
-    "description": {
-      "type": "text"
-    },
     "gettems": {
       "type": "relation",
       "relation": "oneToMany",
@@ -44,6 +41,9 @@
     },
     "subtitle": {
       "type": "string"
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }
