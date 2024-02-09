@@ -5,9 +5,38 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "../src/style.scss";
 
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate
+} from "react-router-dom";
+import Swipe from './views/Swipe';
+import Gallery from './views/Gallery';
+
+const router = createBrowserRouter([
+  {
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Navigate to="/swipe" replace />
+      },
+      {
+        path: "swipe",
+        element: <Swipe />
+      },
+      {
+        path: "gallery",
+        element: <Gallery/>
+      }
+
+    ]
+  },
+]);
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} /> 
   </React.StrictMode>,
   document.getElementById('root')
 );

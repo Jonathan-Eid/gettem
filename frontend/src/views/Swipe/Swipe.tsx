@@ -8,6 +8,7 @@ import {ArrowCounterclockwise, ChevronDoubleRight, ChevronDoubleLeft} from 'reac
 
 interface Props {
     // any props that come into the component
+    children?: any
 }
 
 
@@ -93,8 +94,18 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
                                     </SwipeCard>
                                 </TinderCard>
                     })}
+                    
                 </div>
+
                 
+                {(currentIndex == -1) &&
+                    <div className='end-message'>
+                      <h2>Click the Redo Button to go through the cards again
+                        or view them all in the Gallery
+                      </h2>
+                    </div>
+                  }
+                  
                 <div className='deck-container'>
                     <div className="btn-container p-2 rounded deck d-flex justify-content-center"> 
                         {/* <!-- xl circle buttons--> */}

@@ -44,6 +44,9 @@
     },
     "description": {
       "type": "richtext"
+    },
+    "intro": {
+      "type": "richtext"
     }
   }
 }

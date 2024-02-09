@@ -5,9 +5,11 @@ import $ from "jquery";
 
 import Button from 'react-bootstrap/Button'
 import './Navbar.scss'
+import { NavLink } from 'react-router-dom';
 
 interface Props {
     // any props that come into the component
+    children? : any
 }
  
 const NavBar: FC<Props> = ({children, ...rest}) => {
@@ -40,6 +42,10 @@ const NavBar: FC<Props> = ({children, ...rest}) => {
             "width": activeWidthNewAnimWidth + "px"
           });
         });
+
+        
+
+
       }
 
     React.useEffect(() => {
@@ -68,10 +74,10 @@ const NavBar: FC<Props> = ({children, ...rest}) => {
         <ul className="navbar-nav ml-auto">
             <div className="hori-selector"><div className="left"></div><div className="right"></div></div>
             <li className="nav-item active"> 
-                <a className="nav-link" href="javascript:void(0);"><i className="fas fa-tachometer-alt"></i>Summary Swipe</a>
+                <NavLink to={"swipe"}><i className="fas fa-tachometer-alt"></i>Swipe</NavLink>
             </li>
             <li className="nav-item">
-                <a className="nav-link" href="javascript:void(0);"><i className="far fa-address-book"></i>Gallery</a>
+                <NavLink to={"gallery"}><i className="far fa-address-book"></i>Gallery</NavLink>
             </li>
             <li className="nav-item">
                 <a className="nav-link" href="javascript:void(0);"><i className="far fa-clone"></i>Resume</a>

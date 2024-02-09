@@ -13,7 +13,8 @@ import { kMaxLength } from 'buffer'
 interface Props {
     // any props that come into the component
     index: number
-    card: any 
+    card: any,
+    children?: any
 }
  
 const SwipeCard: FC<Props> = ({children,  ...props}) => {
@@ -33,14 +34,15 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
               <Card.Img src={"http://localhost:1337"+card_images[0].attributes.formats.large.url} />
               <Card.ImgOverlay></Card.ImgOverlay>  
               <Card.Body style={{display: 'flex', flexDirection: 'column', justifyContent: "end"}}>
-                <Card.Subtitle className="mb-2 small">{card.subtitle}
+                <Card.Subtitle className="mb-2">
+                  {card.subtitle}
                 </Card.Subtitle>
-                <Card.Title className="mt-0"><a className="text-white" href="#">{card.name}</a>
+                <Card.Title className="mt-0">{card.name}
                 <InfoCircle onTouchEnd={handleShow} onClick={handleShow} size="22px" className="bi-info-circle"></InfoCircle>
 
                 </Card.Title>
-                <Card.Text>
-                      {card.description}
+                  <Card.Text>
+                      {card.intro}
                   </Card.Text>
               </Card.Body>
               <i onClick={handleShow} onTouchEnd={handleShow} className="bi-info-square"> </i>  
@@ -52,7 +54,7 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
             
 
             <Modal dialogClassName="modal-width" show={show} onHide={handleClose}>
-              <Modal.Header style={{justifyContent: 'center'}} closeButton>
+              <Modal.Header placeholder={"header"} style={{justifyContent: 'center'}} closeButton>
                 <Modal.Title>{card.name}</Modal.Title>
             </Modal.Header>
 
