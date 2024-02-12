@@ -1,7 +1,5 @@
 import React, {FC, useEffect} from 'react'
 import useGithubCard from '../../custom/github'
-import './Gallery.scss'
-
 
 interface Props {
     // any props that come into the component
@@ -16,8 +14,7 @@ const Gallery: FC<Props> = ({children, ...rest}) => {
 
     return <div className="justify-content-center flex-column d-flex" style={{justifyItems: 'center', alignItems: 'center'}} >
 
-            <iframe className='resume' style={{width:"100vw", height: "calc(100vh - 77px)", zIndex: 1000}} src="resume.pdf" />
-            
+                <iframe className='resume' style={{width:"100vw", height: "calc(100vh - 77px)", zIndex: 1000}} src="resume.pdf" />
 
             </div>
 }

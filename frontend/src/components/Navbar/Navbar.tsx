@@ -73,18 +73,34 @@ const NavBar: FC<Props> = ({children, ...rest}) => {
     <Navbar.Collapse className="collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
             <div className="hori-selector"><div className="left"></div><div className="right"></div></div>
-            <li className="nav-item active"> 
-                <NavLink to={"swipe"}><i className="fas fa-tachometer-alt"></i>Swipe</NavLink>
-            </li>
-            <li className="nav-item">
-                <NavLink to={"gallery"}><i className="far fa-address-book"></i>Gallery</NavLink>
-            </li>
-            <li className="nav-item">
-                <a className="nav-link" href="javascript:void(0);"><i className="far fa-clone"></i>Resume</a>
-            </li> 
-            <li className="nav-item">
-                <a className="nav-link" href="javascript:void(0);"><i className="far fa-clone"></i>Github</a>
-            </li> 
+            <NavLink className="nav-ref" to={'swipe'}>
+            {({ isActive, isPending, isTransitioning }) => (
+              <li className={isActive ? "nav-item active" : "nav-item"}> 
+                <a className="nav-link" href="javascript:void(0);"><i className="fas fa-tachometer-alt"></i>Swipe</a>
+              </li>
+            )}
+            </NavLink>
+            <NavLink className="nav-ref" to={'gallery'}>
+            {({ isActive, isPending, isTransitioning }) => (
+              <li className={isActive ? "nav-item active" : "nav-item"}> 
+                <a className="nav-link" href="javascript:void(0);"><i className="fas fa-tachometer-alt"></i>Gallery</a>
+              </li>
+            )}
+              </NavLink>
+            <NavLink className="nav-ref" to={'resume'}>
+              {({ isActive, isPending, isTransitioning }) => (
+                <li className={isActive ? "nav-item active" : "nav-item"}> 
+                  <a className="nav-link" href="javascript:void(0);"><i className="fas fa-tachometer-alt"></i>Resume</a>
+                </li>
+              )}
+            </NavLink>
+            <NavLink className="nav-ref" to={'github'}>
+              {({ isActive, isPending, isTransitioning }) => (
+                <li className={isActive ? "nav-item active" : "nav-item"}> 
+                  <a className="nav-link" href="javascript:void(0);"><i className="fas fa-tachometer-alt"></i>Github</a>
+                </li>
+              )}
+            </NavLink>
         </ul>
     </Navbar.Collapse>
 </Navbar>

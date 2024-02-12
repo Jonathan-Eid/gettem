@@ -12,6 +12,8 @@ import {
 } from "react-router-dom";
 import Swipe from './views/Swipe';
 import Gallery from './views/Gallery';
+import Github from './views/Github';
+import Resume from './views/Resume';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
       {
         path: "gallery",
         element: <Gallery/>
+      },
+      {
+        path: "resume",
+        element: <Resume/>
+      },
+      {
+        path: "github",
+        element: <Github/>
       }
 
     ]
