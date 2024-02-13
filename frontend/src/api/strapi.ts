@@ -9,7 +9,6 @@ async function getCards() {
 
     try{
         const response = await axios.get("http://localhost:1337/api/cards?populate=images")
-        // console.log(response.data,response.headers)
         return response.data
     } catch (error) {
         console.log(error)
@@ -17,4 +16,27 @@ async function getCards() {
 
 }
 
-export {getCards}
+async function getCardsFromCategory(category: string) {
+
+    try{
+        const response = await axios.get(`http://localhost:1337/api/cards?populate=images&filters[category][$eq]=${category}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+
+
+
+async function getCardCategories() {
+    try{
+        const response = await axios.get("http://localhost:1337/api/content-type-builder/content-types/api::card.card")
+        return response.data.data.schema.attributes.category.enum
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export {getCards, getCardsFromCategory, getCardCategories}

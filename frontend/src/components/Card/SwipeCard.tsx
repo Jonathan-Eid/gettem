@@ -12,7 +12,7 @@ import { kMaxLength } from 'buffer'
 
 interface Props {
     // any props that come into the component
-    index: number
+    index?: number
     card: any,
     children?: any
 }

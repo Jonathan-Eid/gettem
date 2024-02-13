@@ -12,7 +12,7 @@ const Github: FC<Props> = ({children, ...rest}) => {
 
     useGithubCard()
 
-    return <div className="justify-content-center flex-column d-flex" style={{justifyItems: 'center', alignItems: 'center', width: "100vw", height: "100vh"}} >
+    return <div className="justify-content-center flex-column d-flex" style={{justifyItems: 'center', alignItems: 'center', width: "100vw", height: "100vh", backdropFilter: "blur(5px)"}} >
 
                 <div className="github-card" data-zindex="1000" data-github="jonathan-eid" data-width="500" data-height="" data-theme="medium"></div>
 

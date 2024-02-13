@@ -249,7 +249,7 @@ background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9
 .modal{
 
   font-family: 'Kanit';
-
+  backdrop-filter: blur(10px);
   .modal-header{
     background-color: lightpink;
   }
