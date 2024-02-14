@@ -90,7 +90,7 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
                                 onCardLeftScreen={() => outOfFrame(card.attributes.name, i)}
                                 preventSwipe={["up","down"]}
                                 className='swipe'>
-                                    <SwipeCard card={card} index={i}>
+                                    <SwipeCard card={card}>
                                     </SwipeCard>
                                 </TinderCard>
                     })}

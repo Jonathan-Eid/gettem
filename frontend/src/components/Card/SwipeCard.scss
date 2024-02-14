@@ -12,12 +12,7 @@
     border-radius: 20px !important;
     background-size: cover;
     background-position: center;
-    box-shadow: 0 0 12px 0 rgba(0,0,0,0.2); 
-    // padding-bottom: 34em;
-
-  
-
-  
+    box-shadow: 1px 4px 2px -2px gray;
 
   &:after{
     padding-bottom: 100%;
@@ -253,5 +248,18 @@ background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9
   .modal-header{
     background-color: lightpink;
   }
+  .modal-body{
+    background-color: #FFEFF3; /* Soft pink base */
+    background-image: 
+      radial-gradient(circle at center, #dac9cc 1px, transparent 2px); /* Pale pink polka dots */
+    background-size: 20px 20px; /* Adjust dot size and spacing */
+    padding: 30px;
+  }
 
+
+}
+
+
+.seperator{   
+  border-color: red($color: #000000);
 }

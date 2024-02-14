@@ -800,7 +800,9 @@ export interface ApiCardCard extends Schema.CollectionType {
       'api::gettem.gettem'
     >;
     images: Attribute.Media;
-    category: Attribute.Enumeration<['about_me', 'work_experiences']>;
+    category: Attribute.Enumeration<
+      ['about_me', 'work_experiences', 'projects']
+    >;
     subtitle: Attribute.String;
     description: Attribute.RichText;
     intro: Attribute.RichText;

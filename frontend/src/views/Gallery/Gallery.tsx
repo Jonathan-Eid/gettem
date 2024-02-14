@@ -24,6 +24,8 @@ const Gallery: FC<Props> = ({children, ...rest}) => {
 
     useEffect( () => {
 
+        // document.body.style.overflowY = "visible";
+
         (async () => {
 
             let cardMap: any = {}
@@ -42,18 +44,22 @@ const Gallery: FC<Props> = ({children, ...rest}) => {
 
         })()
 
+        // return () => {
+        //     document.body.style.overflowY = "hidden";
+        // }
+
     }, [])
 
 
-    return <div className="flex-column d-flex" style={{backdropFilter: "blur(5px)", width: "100vw", height: "100vh"}} >
+    return <div className="flex-column gallery-container" style={{backdropFilter: "blur(7px)", width: "100vw", height: "calc(100vh - 77px)", overflow: "auto"}} >
             
                 <br></br>
                 <Container style={{zIndex:1}} fluid>
-                    {categories.map((category: string) => {
+                    {categories && categories.map((category: string) => {
                             return <><h2 className='underline'>{categoryToTitle(category)}</h2>
                                     <Row>
                                         {cardMapState && cardMapState[category] && cardMapState[category].map((card:any) => {
-                                            return (<Col>
+                                            return (<Col style={{marginTop: "20px"}}>
                                                         <SwipeCard card={card} ></SwipeCard>
                                                     </Col>)
                                         })}

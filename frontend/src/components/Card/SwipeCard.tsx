@@ -12,7 +12,6 @@ import { kMaxLength } from 'buffer'
 
 interface Props {
     // any props that come into the component
-    index?: number
     card: any,
     children?: any
 }
@@ -24,7 +23,6 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true); 
 
-  const index = props.index
   const card = props.card.attributes
   const card_images = card.images.data
   // console.log(card)
@@ -55,36 +53,42 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
 
             <Modal dialogClassName="modal-width" show={show} onHide={handleClose}>
               <Modal.Header placeholder={"header"} style={{justifyContent: 'center'}} closeButton>
-                <Modal.Title>{card.name}</Modal.Title>
-            </Modal.Header>
+                <Modal.Title><h2><b>{card.name}</b></h2></Modal.Title>
+              </Modal.Header>
+              <Modal.Body> 
 
-              <Modal.Body>
-
-              
-              <Carousel className='carousel'> 
-              
-                  {card_images.map((image:any,i:number) => {
-
-                    return <Carousel.Item className="carousel-item"> 
-                    
-                      <img
-                          className="carousel-img"
-                          src={"http://localhost:1337"+image.attributes.formats.large.url}
-                      /> 
-
-                    
-                    </Carousel.Item>
-                  })} 
+              {/* linear-gradient(to bottom, #FCD5CE 0%, #E1F5FE 100%) */}
+                
+                  <Carousel className='carousel'> 
                   
-                </Carousel> 
-                <Markdown>
-                  {card.description}
-                </Markdown>
+                      {card_images.map((image:any,i:number) => {
+
+                        return <Carousel.Item className="carousel-item"> 
+                        
+                          <img
+                              style={{objectFit:"cover"}}
+                              className="carousel-img"
+                              src={"http://localhost:1337"+image.attributes.formats.large.url}
+                          /> 
+
+                        
+                        </Carousel.Item>
+                      })}
+                      
+                    </Carousel>
+
+
+                  <hr/>
+                  <Markdown>
+
+                    {card.description}
+
+                  </Markdown>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                  Close
-                </Button>
+                  <Button variant="secondary" onClick={handleClose}>
+                    Close
+                  </Button>
               </Modal.Footer>
             </Modal>
 

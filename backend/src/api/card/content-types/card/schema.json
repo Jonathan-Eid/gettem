@@ -36,7 +36,8 @@
       "type": "enumeration",
       "enum": [
         "about_me",
-        "work_experiences"
+        "work_experiences",
+        "projects"
       ]
     },
     "subtitle": {
