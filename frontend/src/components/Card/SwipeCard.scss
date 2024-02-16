@@ -259,6 +259,29 @@ background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9
 
 }
 
+.carousel-container{
+  background: rgba(0, 0, 0, 0.349);
+  backdrop-filter: blur(2px);
+  border-radius: 50px;
+
+}
+
+
+.carousel-control-prev, 
+.carousel-control-next {
+
+  opacity: 1;   /* Slightly faded by default */
+}
+
+.carousel-control-prev-icon, 
+.carousel-control-next-icon {
+
+  filter: drop-shadow(2px 2px 5px #000000);
+   
+}
+
+
+
 
 .seperator{   
   border-color: red($color: #000000);

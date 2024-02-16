@@ -5,7 +5,7 @@ const access_token = "9e53a9de0b413e1f8e52d8f19a8dba33d8c694c95a7b9d8c7f067f1d00
 axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}` 
 
 
-async function getCards() {
+export async function getCards() {
 
     try{
         const response = await axios.get("http://localhost:1337/api/cards?populate=images")
@@ -16,7 +16,7 @@ async function getCards() {
 
 }
 
-async function getCardsFromCategory(category: string) {
+export async function getCardsFromCategory(category: string) {
 
     try{
         const response = await axios.get(`http://localhost:1337/api/cards?populate=images&filters[category][$eq]=${category}`)
@@ -28,9 +28,7 @@ async function getCardsFromCategory(category: string) {
 }
 
 
-
-
-async function getCardCategories() {
+export async function getCardCategories() {
     try{
         const response = await axios.get("http://localhost:1337/api/content-type-builder/content-types/api::card.card")
         return response.data.data.schema.attributes.category.enum
@@ -39,4 +37,26 @@ async function getCardCategories() {
     }
 }
 
-export {getCards, getCardsFromCategory, getCardCategories}
+
+export async function getResume() {
+
+    try{
+        const response = await axios.get("http://localhost:1337/api/resume?populate=document")
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+export async function getGithub() {
+
+    try{
+        const response = await axios.get("http://localhost:1337/api/github")
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+

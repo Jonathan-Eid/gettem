@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "githubs",
+  "info": {
+    "singularName": "github",
+    "pluralName": "githubs",
+    "displayName": "Github"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "account": {
+      "type": "json"
+    }
+  }
+}

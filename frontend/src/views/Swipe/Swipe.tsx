@@ -77,6 +77,12 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
         updateCurrentIndex(newIndex)
         await childRefs[newIndex].current.restoreCard()
       }
+
+      const redoAll = async () => {
+        for (let index = 0; index < 3; index++){
+          await goBack()
+        }
+      }
     
 
     return <div className="justify-content-center flex-column d-flex swipe-container" style={{justifyItems: 'center', alignItems: 'center'}} >
@@ -95,16 +101,20 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
                                 </TinderCard>
                     })}
                     
+                  {(currentIndex == -1) &&
+                    <div className='end-message-container'>
+                      <div className='end-message'>
+                        <Button size="lg" variant='outline-dark' href='/'>Redo</Button> <hr></hr><Button size="lg" variant='outline-dark' href="/gallery">View Gallery</Button>
+                      </div>
+                      
+                    </div>
+                  }
+                  
+
                 </div>
 
                 
-                {(currentIndex == -1) &&
-                    <div className='end-message'>
-                      <h2>Click the Redo Button to go through the cards again
-                        or view them all in the Gallery
-                      </h2>
-                    </div>
-                  }
+                
                   
                 <div className='deck-container'>
                     <div className="btn-container p-2 rounded deck d-flex justify-content-center"> 

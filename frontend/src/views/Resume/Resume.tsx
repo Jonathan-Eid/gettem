@@ -1,5 +1,6 @@
-import React, {FC, useEffect} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import useGithubCard from '../../custom/github'
+import { getResume } from '../../api/strapi'
 
 interface Props {
     // any props that come into the component
@@ -9,12 +10,21 @@ interface Props {
 
 const Gallery: FC<Props> = ({children, ...rest}) => {
 
+    const [resume, setResume] = useState<any>()
 
-    useGithubCard()
+    useEffect(() => {
+
+        (async () => {
+            const resume = await getResume()
+            setResume(resume.data.attributes.document.data.attributes.url)
+        })()
+        
+    },[])
+
 
     return <div className="justify-content-center flex-column d-flex" style={{justifyItems: 'center', alignItems: 'center'}} >
 
-                <iframe className='resume' style={{width:"100vw", height: "calc(100vh - 77px)", zIndex: 1000}} src="resume.pdf" />
+                <iframe className='resume' style={{width:"100vw", height: "calc(100vh - 77px)", zIndex: 1000}} src={`http://localhost:1337${resume}`} />
 
             </div>
 }

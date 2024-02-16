@@ -852,6 +852,66 @@ export interface ApiGettemGettem extends Schema.CollectionType {
   };
 }
 
+export interface ApiGithubGithub extends Schema.SingleType {
+  collectionName: 'githubs';
+  info: {
+    singularName: 'github';
+    pluralName: 'githubs';
+    displayName: 'Github';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    account: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::github.github',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::github.github',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiResumeResume extends Schema.SingleType {
+  collectionName: 'resumes';
+  info: {
+    singularName: 'resume';
+    pluralName: 'resumes';
+    displayName: 'resume';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    document: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::resume.resume',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::resume.resume',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -872,6 +932,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::card.card': ApiCardCard;
       'api::gettem.gettem': ApiGettemGettem;
+      'api::github.github': ApiGithubGithub;
+      'api::resume.resume': ApiResumeResume;
     }
   }
 }

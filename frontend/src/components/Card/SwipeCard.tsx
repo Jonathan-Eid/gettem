@@ -57,7 +57,7 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
               </Modal.Header>
               <Modal.Body> 
 
-              {/* linear-gradient(to bottom, #FCD5CE 0%, #E1F5FE 100%) */}
+                <div className='carousel-container'>
                 
                   <Carousel className='carousel'> 
                   
@@ -76,7 +76,7 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
                       })}
                       
                     </Carousel>
-
+                  </div>
 
                   <hr/>
                   <Markdown>

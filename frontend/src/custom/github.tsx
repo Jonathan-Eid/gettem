@@ -5,11 +5,12 @@ import { useEffect } from "react"
 declare global {
     interface Window { githubCard: any; }
 }
-function useGithubCard(){
+function useGithubCard(github:any){
 
     useEffect( () => {
   
-        var base: any = "";
+        (async () => {
+            var base: any = "";
 
         var i, count = 0;
 
@@ -125,8 +126,8 @@ function useGithubCard(){
         if (window.githubCard) {
             window.githubCard.render = render;
         }
-    
-      }, []) 
+        })()
+      }, [github]) 
 
 }
 
