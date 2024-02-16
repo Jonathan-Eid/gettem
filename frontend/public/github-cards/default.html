@@ -6,7 +6,7 @@
         padding: 0;
         margin: 0;
         font-size: 14px;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
         overflow: hidden
       }
 
@@ -192,7 +192,7 @@
 
       .repo-card .content p {
         margin: 0 5px 0 0;
-        font: 18px/24px Georgia, "Times New Roman", Palatino, serif;
+        /* font: 18px/24px Georgia, "Times New Roman", Palatino, serif; */
         overflow: hidden;
         clear: both;
         word-wrap: normal;
@@ -227,213 +227,225 @@
     <script id="repo-card" type="text/template"><div class="header"><strong class="name"><a href="https://github.com/{full_name}" onclick="window.open(this.href,'_blank');return false;" rel="noopener noreferrer">{name}</a><sup class="language">{language}</sup></strong><span>{action}<a href="https://github.com/{login}" onclick="window.open(this.href,'_blank');return false;" rel="noopener noreferrer">{login}</a></span><a class="button" href="https://github.com/{full_name}" onclick="window.open(this.href,'_blank');return false;" rel="noopener noreferrer">Star</a></div><div class="content"><p>{description}{homepage}</p></div><div class="footer"><span class="status"><strong>{forks_count}</strong>Forks</span><span class="status"><strong>{watchers_count}</strong>Stars</span></div></script>
     <script>
       function querystring() {
-        var e = window.location.href,
-          r;
-        var t = e.slice(e.indexOf("?") + 1).split("&");
-        var a = [];
-        for (i = 0; i < t.length; i++) {
-          r = t[i].split("=");
-          a.push(r[0]);
-          a[r[0]] = r[1]
+        var href = window.location.href, kv;
+        var params = href.slice(href.indexOf('?') + 1).split('&');
+        var qs = [];
+
+        for (i = 0; i < params.length; i++) {
+          kv = params[i].split('=');
+          qs.push(kv[0]);
+          qs[kv[0]] = kv[1];
         }
-        return a
+        return qs;
       }
       var qs = querystring();
-      (function(l) {
-        var r = "https://api.github.com/",
-          o;
+      (function(d) {
+        var baseurl = 'https://api.github.com/', i;
 
-        function c(e, r) {
+        function store(key, value) {
           try {
             if (window.localStorage) {
-              if (r) {
-                r._timestamp = (new Date).valueOf();
-                localStorage[e] = JSON.stringify(r)
+              if (value) {
+                value._timestamp = new Date().valueOf();
+                localStorage[key] = JSON.stringify(value);
               } else {
-                var t = localStorage[e];
-                if (t) {
-                  return JSON.parse(t)
+                var ret = localStorage[key];
+                if (ret) {
+                  return JSON.parse(ret);
                 }
-                return null
+                return null;
               }
             }
-          } catch (e) {}
+          } catch(e) {}
         }
 
-        function s(e, r) {
-          var t = e;
-          var a = r.split(".");
-          for (var n = 0; n < a.length; n++) {
-            if (t) {
-              t = t[a[n]]
+        function valueof(data, key) {
+          var ret = data;
+          var bits = key.split('.');
+          for (var j = 0; j < bits.length; j++) {
+            if (ret) {
+              ret = ret[bits[j]];
             } else {
-              break
+              break;
             }
           }
-          if (t === undefined || t === null) {
-            return ""
+          if (ret === undefined || ret === null) {
+            return '';
           }
-          return t
+          return ret;
         }
 
-        function u(e, r) {
-          var t = l.getElementById(e + "-card");
-          var a = /{([^}]+)}/g;
-          var n = t.innerHTML;
-          var i = n.match(a);
-          for (o = 0; o < i.length; o++) {
-            n = n.replace(i[o], s(r, i[o].slice(1, -1)))
+        function template(type, data) {
+          var t = d.getElementById(type + '-card');
+          var regex = /{([^}]+)}/g;
+          var text = t.innerHTML;
+          var m = text.match(regex);
+          for (i = 0; i < m.length; i++) {
+            text = text.replace(m[i], valueof(data, m[i].slice(1, -1)));
           }
-          return n
+          return text;
         }
 
-        function t(e, r) {
-          var t = c(e);
-          if (t && t._timestamp) {
-            if ((new Date).valueOf() - t._timestamp < 1e4) {
-              return r(t)
+        function request(url, callback) {
+          var cache = store(url);
+          if (cache && cache._timestamp) {
+            // cache in 10s
+            if (new Date().valueOf() - cache._timestamp < 10000) {
+              return callback(cache);
             }
           }
           if (qs.client_id && qs.client_secret) {
-            e += "?client_id=" + qs.client_id + "&client_secret=" + qs.client_secret
+            url += '?client_id=' + qs.client_id + '&client_secret=' + qs.client_secret;
           }
-          var a = new XMLHttpRequest;
-          a.open("GET", e, true);
-          a.onload = function() {
-            r(JSON.parse(a.response))
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', url, true);
+          xhr.onload = function() {
+            callback(JSON.parse(xhr.response));
           };
-          a.send()
+          xhr.send();
         }
 
-        function f(e, r) {
-          var t = e.getElementsByTagName("a");
-          for (o = 0; o < t.length; o++) {
-            (function(e) {
-              e.target = "_" + (qs.target || "top")
-            })(t[o])
+        function linky(card, identity) {
+          var links = card.getElementsByTagName('a');
+          for (i = 0; i < links.length; i++) {
+            (function(link) {
+              link.target = '_' + (qs.target || 'top');
+            })(links[i]);
           }
-          l.body.appendChild(e);
-          l.body.className = "ready";
+          d.body.appendChild(card);
+          d.body.className = 'ready';
           if (parent !== self && parent.postMessage) {
-            var a = Math.max(l.body.scrollHeight, l.documentElement.scrollHeight, l.body.offsetHeight, l.documentElement.offsetHeight, l.body.clientHeight, l.documentElement.clientHeight);
+            var height = Math.max(
+              d.body.scrollHeight,
+              d.documentElement.scrollHeight,
+              d.body.offsetHeight,
+              d.documentElement.offsetHeight,
+              d.body.clientHeight,
+              d.documentElement.clientHeight
+            );
             parent.postMessage({
-              height: a,
-              sender: qs.identity || "*"
-            }, "*")
+              height: height,
+              sender: qs.identity || '*'
+            }, '*');
           }
         }
 
-        function e(o) {
-          var s = r + "users/" + o;
-          t(s, function(e) {
-            e = e || {};
-            var r = e.message;
-            var t = "0";
-            if (r) {
-              e = c(s) || e;
-              t = "?"
+        function userCard(user) {
+          var url = baseurl + 'users/' + user;
+          request(url, function(data) {
+            data = data || {};
+            var message = data.message;
+            var defaults = '0';
+            if (message) {
+              data = store(url) || data;
+              defaults = '?';
             } else {
-              c(s, e)
+              store(url, data);
             }
-            e.login = o;
-            e.name = g(e.name || o);
-            e.public_repos = p(e.public_repos) || t;
-            e.public_gists = p(e.public_gists) || t;
-            e.followers = p(e.followers) || t;
-            var a = "Not available for hire.";
-            if (e.hireable) {
-              var n = "";
-              if (e.email) {
-                n = "mailto:" + e.email
-              } else if (e.blog) {
-                n = e.blog
+            data.login = user;
+            data.name = escape(data.name || user);
+            data.public_repos = numberic(data.public_repos) || defaults;
+            data.public_gists = numberic(data.public_gists) || defaults;
+            data.followers = numberic(data.followers) || defaults;
+
+            var job = 'Not available for hire.';
+            if (data.hireable) {
+              var link = '';
+              if (data.email) {
+                link = 'mailto:' + data.email;
+              } else if (data.blog) {
+                link = data.blog;
               } else {
-                n = e.html_url
+                link = data.html_url;
               }
-              a = '<a href="' + n + '">Available for hire.</a>'
+              job = '<a href="' + link + '">Available for hire.</a>';
             }
-            if (r) {
-              a = r
+            if (message) {
+              job = message;
             }
-            e.job = a;
-            var i = l.createElement("div");
-            i.className = "github-card user-card";
-            i.innerHTML = u("user", e);
-            f(i)
-          })
+            data.job = job;
+
+            var card = d.createElement('div');
+            card.className = 'github-card user-card';
+            card.innerHTML = template('user', data);
+            linky(card);
+          });
         }
 
-        function a(o, e) {
-          var s = r + "repos/" + o + "/" + e;
-          t(s, function(e) {
-            e = e || {};
-            var r = e.message;
-            var t = "0";
-            if (r) {
-              e = c(s) || e;
-              t = "?"
+        function repoCard(user, repo) {
+          var url = baseurl + 'repos/' + user + '/' + repo;
+          request(url, function(data) {
+            data = data || {};
+            var message = data.message;
+            var defaults = '0';
+            if (message) {
+              data = store(url) || data;
+              defaults = '?';
             } else {
-              c(s, e)
+              store(url, data);
             }
-            e.login = o;
-            e.avatar_url = "";
-            if (e.owner && e.owner.avatar_url) {
-              e.avatar_url = e.owner.avatar_url
+            data.login = user;
+
+            data.avatar_url = '';
+            if (data.owner && data.owner.avatar_url) {
+              data.avatar_url = data.owner.avatar_url;
             }
-            e.forks_count = p(e.forks_count) || t;
-            e.watchers_count = p(e.watchers_count) || t;
-            if (e.fork) {
-              e.action = "Forked by "
+            data.forks_count = numberic(data.forks_count) || defaults;
+            data.watchers_count = numberic(data.watchers_count) || defaults;
+            if (data.fork) {
+              data.action = 'Forked by ';
             } else {
-              e.action = "Created by "
+              data.action = 'Created by ';
             }
-            var a = e.description;
-            if (!a && e.source) {
-              a = e.source.description
+            var description = data.description;
+            if (!description && data.source) {
+              description = data.source.description;
             }
-            if (!a && r) {
-              a = r
+            if (!description && message) {
+              description = message;
             }
-            e.description = g(a) || "No description";
-            var n = e.homepage;
-            if (!n && e.source) {
-              n = e.source.homepage
+            data.description = escape(description) || 'No description';
+            var homepage = data.homepage;
+            if (!homepage && data.source) {
+              homepage = data.source.homepage;
             }
-            if (n) {
-              e.homepage = ' <a href="' + n + '">' + n.replace(/https?:\/\//, "").replace(/\/$/, "") + "</a>"
+            if (homepage) {
+              data.homepage = ' <a href="' + homepage + '">' + homepage.replace(/https?:\/\//, '').replace(/\/$/, '') + '</a>';
             } else {
-              e.homepage = ""
+              data.homepage = '';
             }
-            var i = l.createElement("div");
-            i.className = "github-card repo-card";
-            i.innerHTML = u("repo", e);
-            f(i)
-          })
+
+            var card = d.createElement('div');
+            card.className = 'github-card repo-card';
+            card.innerHTML = template('repo', data);
+            linky(card);
+          });
         }
 
-        function n() {}
-
-        function p(e) {
-          if (!e) return null;
-          if (e === 1e3) return 1;
-          if (e < 1e3) return e;
-          e = e / 1e3;
-          if (e > 10) return parseInt(e, 10) + "k";
-          return e.toFixed(1) + "k"
+        function errorCard() {
         }
+
+        function numberic(num) {
+          if (!num) return null;
+          if (num === 1000) return '1k';
+          if (num < 1000) return num;
+          num = num / 1000;
+          if (num > 10) return parseInt(num, 10) + 'k';
+          return num.toFixed(1) + 'k';
+        }
+
         if (!qs.user) {
-          n()
+          errorCard();
         } else if (qs.repo) {
-          a(qs.user, qs.repo)
+          repoCard(qs.user, qs.repo);
         } else {
-          e(qs.user)
+          userCard(qs.user);
         }
 
-        function g(e) {
-          if (!e){
-            return ""
+        function escape(text) {
+          if (text){
+            return text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
           }
-          return e.replace(/</g, "&lt;").replace(/>/g, "&gt;")
         }
       })(document);
 
