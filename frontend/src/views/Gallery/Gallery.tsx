@@ -51,13 +51,13 @@ const Gallery: FC<Props> = ({children, ...rest}) => {
     }, [])
 
 
-    return <div className="flex-column gallery-container" style={{backdropFilter: "blur(7px)", width: "100vw", height: "calc(100vh - 77px)", overflow: "auto"}} >
+    return <div className="gallery-container" style={{width: "100vw", height: "calc(100vh - 77px)"}} >
             
                 <br></br>
                 <Container style={{zIndex:1}} fluid>
                     {categories && categories.map((category: string) => {
                             return <><h2 className='underline'>{categoryToTitle(category)}</h2>
-                                    <Row>
+                                    <Row className='gallery-row'>
                                         {cardMapState && cardMapState[category] && cardMapState[category].map((card:any) => {
                                             return (<Col style={{marginTop: "20px"}}>
                                                         <SwipeCard card={card} ></SwipeCard>

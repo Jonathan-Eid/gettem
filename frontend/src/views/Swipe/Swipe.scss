@@ -3,8 +3,37 @@
     position: absolute;
     overflow: hidden;
 
-    
+  
   }
+
+.animation_trigger{
+  animation: swipe-and-return 1.4s ease-in; 
+}
+
+@keyframes swipe-and-return {
+  0% { 
+    transform: translateX(0); 
+  }
+  20% { 
+    transform: translateX(50px) rotate(5deg); 
+  } /* Adjust swipe distance as needed */
+  40% { 
+    transform: translateX(400px) rotate(25deg); 
+  } /* Hold the swipe briefly */
+  60% { 
+    transform: translateX(0); 
+    // offset-path: ray(90deg);
+  }
+  75% { 
+    transform: translateX(-50px) rotate(-5deg); 
+  } /* Adjust swipe distance as needed */
+  90% { 
+    transform: translateX(-300px) rotate(-20deg); 
+  }
+  100%{
+    transform: translateX(0) rotate(0deg);
+  }
+}
 
   .swipe-container{
 

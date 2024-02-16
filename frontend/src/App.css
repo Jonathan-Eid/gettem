@@ -38,6 +38,10 @@
   }
 }
 
+body{
+  background: transparent !important;
+}
+
 /* #root {
   text-align: center;
   display: flex;

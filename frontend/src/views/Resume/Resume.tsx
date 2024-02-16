@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react'
 import useGithubCard from '../../custom/github'
-import { getResume } from '../../api/strapi'
+import { STRAPI_URL, getResume } from '../../api/strapi'
 
 interface Props {
     // any props that come into the component
@@ -24,7 +24,7 @@ const Gallery: FC<Props> = ({children, ...rest}) => {
 
     return <div className="justify-content-center flex-column d-flex" style={{justifyItems: 'center', alignItems: 'center'}} >
 
-                <iframe className='resume' style={{width:"100vw", height: "calc(100vh - 77px)", zIndex: 1000}} src={`http://localhost:1337${resume}`} />
+                <iframe className='resume' style={{width:"100vw", height: "calc(100vh - 77px)", zIndex: 1000}} src={`${STRAPI_URL}${resume}`} />
 
             </div>
 }

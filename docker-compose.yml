@@ -5,6 +5,9 @@ services:
     build: 
       context: ./frontend
       dockerfile: Dockerfile.dev
+      args: 
+        REACT_APP_STRAPI_URL: ${STRAPI_URL}
+        REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
     ports:
       - '3000:3000'
     volumes:

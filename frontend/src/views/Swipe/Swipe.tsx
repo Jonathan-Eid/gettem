@@ -21,12 +21,15 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
     const currentIndexRef = useRef(currentIndex)
 
 
+
+
     useEffect( () => {
   
         getCards().then(data => {
             cards.current = data.data
             setCurrentIndex(data.data.length-1)
             currentIndexRef.current = data.data.length-1
+            localStorage.setItem("animated","true")
 
         })
     
@@ -37,6 +40,7 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
           Array(cards.current.length)
             .fill(0)
             .map((i) => React.createRef<any>()),
+
         [cards.current]
       )
 
@@ -78,27 +82,24 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
         await childRefs[newIndex].current.restoreCard()
       }
 
-      const redoAll = async () => {
-        for (let index = 0; index < 3; index++){
-          await goBack()
-        }
-      }
-    
-
     return <div className="justify-content-center flex-column d-flex swipe-container" style={{justifyItems: 'center', alignItems: 'center'}} >
 
                 <div className='card-container'>
                     {cards.current.map((card:any,i) => {
-                        return <TinderCard 
-                                ref={childRefs[i]}
-                                key={card.attributes.name}
-                                onSwipe={(dir) => swiped(dir, i)}
-                                onCardLeftScreen={() => outOfFrame(card.attributes.name, i)}
-                                preventSwipe={["up","down"]}
-                                className='swipe'>
-                                    <SwipeCard card={card}>
-                                    </SwipeCard>
-                                </TinderCard>
+                      
+                          return <TinderCard 
+                          ref={childRefs[i]}
+                          key={card.attributes.name}
+                          onSwipe={(dir) => swiped(dir, i)}
+                          onCardLeftScreen={() => outOfFrame(card.attributes.name, i)}
+                          preventSwipe={["up","down"]}
+                          className={(i==cards.current.length-1 && localStorage.getItem("animated") != "true") ? 'swipe animation_trigger':'swipe'}>
+                              <SwipeCard card={card}>
+                              </SwipeCard>
+                          </TinderCard>
+
+
+                        
                     })}
                     
                   {(currentIndex == -1) &&
@@ -117,8 +118,7 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
                 
                   
                 <div className='deck-container'>
-                    <div className="btn-container p-2 rounded deck d-flex justify-content-center"> 
-                        {/* <!-- xl circle buttons--> */}
+                    <div className="btn-container p-2 rounded deck d-flex justify-content-center">
                         <Button variant="lightpink" className="btn-circle-xl m-1" onClick={() => swipe('left')}><ChevronDoubleLeft></ChevronDoubleLeft></Button>
                         <span className="btn-spacer" ></span>
                         <Button variant='lavenderblush' className="btn-circle-xl m-1" onClick={() => goBack()}><ArrowCounterclockwise></ArrowCounterclockwise></Button>
