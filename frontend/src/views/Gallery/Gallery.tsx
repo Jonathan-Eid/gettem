@@ -1,10 +1,9 @@
 import React, {FC, useEffect, useRef, useState} from 'react'
-import useGithubCard from '../../custom/github'
 import './Gallery.scss'
 import { getCardCategories, getCardsFromCategory } from '../../api/strapi'
 import { Col, Container, Row } from 'react-bootstrap'
 import { categoryToTitle } from '../../utils/utils'
-import SwipeCard from '../../components/Card'
+import SwipeCard from '../../components/SwipeCard'
 
 
 interface Props {
@@ -44,9 +43,7 @@ const Gallery: FC<Props> = ({children, ...rest}) => {
 
         })()
 
-        // return () => {
-        //     document.body.style.overflowY = "hidden";
-        // }
+
 
     }, [])
 

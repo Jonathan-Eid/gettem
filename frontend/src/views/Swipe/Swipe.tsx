@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useMemo, useRef, useState } from 'react'
-import SwipeCard from '../../components/Card'
+import SwipeCard from '../../components/SwipeCard'
 import TinderCard from 'react-tinder-card'
 import './Swipe.scss'
 import { getCards } from '../../api/strapi'
@@ -86,7 +86,7 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
 
                 <div className='card-container'>
                     {cards.current.map((card:any,i) => {
-                      
+
                           return <TinderCard 
                           ref={childRefs[i]}
                           key={card.attributes.name}

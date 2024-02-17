@@ -37,9 +37,8 @@
 
   .swipe-container{
 
-    width: 100vw;
-    min-height: 100vh;
-    overflow: hidden;
+    min-width: 100vw;
+    height: calc(100vh - 77px);
     
   }
 
@@ -51,6 +50,7 @@
     max-width: 400px;
     height: 70vh;
     max-height: 650px;
+
   }
 
   .deck-container {
@@ -84,12 +84,7 @@
     }
   }
 
-  .deck{
-    // width: 100vw;
-    @media (max-width: 576px) {
-      width: 100vw;
-    }
-  }
+
   
   .btn-lightpink {
     margin: 10;

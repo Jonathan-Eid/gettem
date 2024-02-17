@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import './style.scss';
 import 'bootstrap/dist/css/bootstrap.css';
-import Card from './components/Card';
+import Card from './components/SwipeCard';
 import Navbar from './components/Navbar';
 import Swipe from './views/Swipe';
 import useAnimatePetal from "./custom/petal"

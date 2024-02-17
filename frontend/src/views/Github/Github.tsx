@@ -1,8 +1,9 @@
 import React, {FC, useEffect, useState} from 'react'
-import useGithubCard from '../../custom/github'
 import { Col, Container, Row } from 'react-bootstrap'
 import "./Github.scss"
 import { getGithub } from '../../api/strapi'
+import RepoCard from '../../components/GithubCards/RepoCard'
+import ProfileCard from '../../components/GithubCards/ProfileCard'
 
 interface Props {
     // any props that come into the component
@@ -24,7 +25,6 @@ const Github: FC<Props> = ({children, ...rest}) => {
         ]
       })
 
-    useGithubCard(github)
 
     function getGroups(repos:string[]):string[]{
 
@@ -69,13 +69,10 @@ const Github: FC<Props> = ({children, ...rest}) => {
                 <Container fluid className='github-container'>
                     <Row className="justify-content-md-center">
 
-                        <Col md="auto"> {/* Larger item on the left */}
+                        <Col md="auto"> 
 
                         <div className="larger-item"> 
-                            {/* Content for the larger item */}
-                            {github && <div className="github-card" data-github={github['user']} data-width="500" data-height="" data-theme="medium"></div>}
-                            
-
+                            {github && <ProfileCard style={{width: 500}} user={github['user']}></ProfileCard>}
                         </div>
                         </Col>
 
@@ -83,7 +80,7 @@ const Github: FC<Props> = ({children, ...rest}) => {
                             return <Col md="auto">
                                         {group.map((repo:any)=> {
                                             return <div className="smaller-item">
-                                                        <div className="github-card" data-user={github['user']} data-repo={repo} data-width="400" data-height="" data-theme="default"></div>
+                                                        <RepoCard style={{width: 400, height: 150, marginBottom: 15}} user={github['user']} repo={repo}></RepoCard>
                                                     </div>
                                         })}
                                     </Col>

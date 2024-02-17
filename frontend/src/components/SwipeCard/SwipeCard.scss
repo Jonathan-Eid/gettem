@@ -5,7 +5,7 @@
     overflow:hidden;
     position: relative;
     background-color: #fff;
-    width: 80vw;
+    width: 100vw;
     max-width: 400px;
     height: 70vh;
     max-height: 650px;
@@ -240,7 +240,12 @@ background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9
 }
 
 
+.modal-width{
+  width: 96vw;
+}
+
 .modal{
+
 
   font-family: 'Kanit';
   backdrop-filter: blur(10px);
@@ -262,6 +267,21 @@ background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9
   background: rgba(0, 0, 0, 0.349);
   backdrop-filter: blur(2px);
   border-radius: 50px;
+  width: 100%;
+
+
+
+}
+
+.carousel{
+
+  width: 80%;
+
+}
+
+.carousel-img{
+
+  width: 100%;
 
 }
 

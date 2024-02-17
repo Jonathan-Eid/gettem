@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from 'react'
-import useGithubCard from '../../custom/github'
 import { STRAPI_URL, getResume } from '../../api/strapi'
 
 interface Props {
