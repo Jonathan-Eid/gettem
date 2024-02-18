@@ -37,7 +37,6 @@ jobs:
 
     - id: 'ls-ssh'
       uses: 'google-github-actions/ssh-compute@v1'
-      continue-on-error: true
       with:
         instance_name: 'instance-20240216-171943'
         zone: 'us-central1-a'
@@ -47,7 +46,6 @@ jobs:
 
     - id: 'compute-ls'
       uses: 'google-github-actions/ssh-compute@v1'
-      continue-on-error: true
       with:
         instance_name: 'instance-20240216-171943'
         zone: 'us-central1-a'
@@ -55,19 +53,8 @@ jobs:
         ssh_private_key: '${{ secrets.GCP_SSH }}'
         command: ls ~/gettem
 
-    - id: 'git-update'
-      uses: 'google-github-actions/ssh-compute@v1'
-      continue-on-error: true
-      with:
-        instance_name: 'instance-20240216-171943'
-        zone: 'us-central1-a'
-        user: 'github'
-        ssh_private_key: '${{ secrets.GCP_SSH }}'
-        command: "cd ~/gettem; git fetch origin prod; git reset --hard FETCH_HEAD; git clean -df"
-
     - id: 'compute-ssh'
       uses: 'google-github-actions/ssh-compute@v1'
-      continue-on-error: true
       with:
         instance_name: 'instance-20240216-171943'
         zone: 'us-central1-a'
@@ -78,18 +65,22 @@ jobs:
 
     # Example of using the output
     - id: 'test'
+      if: always()
       run: |-
         echo '${{ steps.ls-ssh.outputs.stdout }}'
         echo '${{ steps.ls-ssh.outputs.stderr }}'
     - id: 'test1'
+      if: always()
       run: |-
         echo '${{ steps.compute-ls.outputs.stdout }}'
         echo '${{ steps.compute-ls.outputs.stderr }}'
     - id: 'test2'
+      if: always()
       run: |-
         echo '${{ steps.git-update.outputs.stdout }}'
         echo '${{ steps.git-update.outputs.stderr }}'
     - id: 'test3'
+      if: always()
       run: |-
         echo '${{ steps.compute-ssh.outputs.stdout }}'
         echo '${{ steps.compute-ssh.outputs.stderr }}'
