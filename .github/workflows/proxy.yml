@@ -41,7 +41,14 @@ jobs:
         zone: 'us-central1-a'
         user: 'github'
         ssh_private_key: '${{ secrets.GCP_SSH }}'
-        command: 'echo Hello world'
+        command: |
+          cd gettem
+          git switch prod
+          git fetch origin prod
+          git reset --hard FETCH_HEAD
+          git clean -df
+
+          docker compose up -f docker-compose-prod.yml -d traefik
 
     # Example of using the output
     - id: 'test'
