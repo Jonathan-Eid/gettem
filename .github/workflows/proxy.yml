@@ -34,6 +34,25 @@ jobs:
         workload_identity_provider: 'projects/527783132744/locations/global/workloadIdentityPools/gettem-github/providers/github'
         service_account: 'gettem-github-actions@portfolio-website-414517.iam.gserviceaccount.com'
 
+
+    - id: 'ls-ssh'
+      uses: 'google-github-actions/ssh-compute@v1'
+      with:
+        instance_name: 'instance-20240216-171943'
+        zone: 'us-central1-a'
+        user: 'github'
+        ssh_private_key: '${{ secrets.GCP_SSH }}'
+        command: ls
+
+    - id: 'compute-ls'
+      uses: 'google-github-actions/ssh-compute@v1'
+      with:
+        instance_name: 'instance-20240216-171943'
+        zone: 'us-central1-a'
+        user: 'github'
+        ssh_private_key: '${{ secrets.GCP_SSH }}'
+        command: ls ~/gettem
+
     - id: 'git-update'
       uses: 'google-github-actions/ssh-compute@v1'
       with:
@@ -50,7 +69,7 @@ jobs:
         zone: 'us-central1-a'
         user: 'github'
         ssh_private_key: '${{ secrets.GCP_SSH }}'
-        script: /home/github/gettem/traefik.sh
+        script: ~/gettem/traefik.sh
           
 
     # Example of using the output
