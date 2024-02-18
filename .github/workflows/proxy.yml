@@ -37,6 +37,7 @@ jobs:
 
     - id: 'ls-ssh'
       uses: 'google-github-actions/ssh-compute@v1'
+      continue-on-error: true
       with:
         instance_name: 'instance-20240216-171943'
         zone: 'us-central1-a'
@@ -46,6 +47,7 @@ jobs:
 
     - id: 'compute-ls'
       uses: 'google-github-actions/ssh-compute@v1'
+      continue-on-error: true
       with:
         instance_name: 'instance-20240216-171943'
         zone: 'us-central1-a'
@@ -55,6 +57,7 @@ jobs:
 
     - id: 'git-update'
       uses: 'google-github-actions/ssh-compute@v1'
+      continue-on-error: true
       with:
         instance_name: 'instance-20240216-171943'
         zone: 'us-central1-a'
@@ -64,6 +67,7 @@ jobs:
 
     - id: 'compute-ssh'
       uses: 'google-github-actions/ssh-compute@v1'
+      continue-on-error: true
       with:
         instance_name: 'instance-20240216-171943'
         zone: 'us-central1-a'
@@ -74,6 +78,18 @@ jobs:
 
     # Example of using the output
     - id: 'test'
+      run: |-
+        echo '${{ steps.ls-ssh.outputs.stdout }}'
+        echo '${{ steps.ls-ssh.outputs.stderr }}'
+    - id: 'test1'
+      run: |-
+        echo '${{ steps.compute-ls.outputs.stdout }}'
+        echo '${{ steps.compute-ls.outputs.stderr }}'
+    - id: 'test2'
+      run: |-
+        echo '${{ steps.git-update.outputs.stdout }}'
+        echo '${{ steps.git-update.outputs.stderr }}'
+    - id: 'test3'
       run: |-
         echo '${{ steps.compute-ssh.outputs.stdout }}'
         echo '${{ steps.compute-ssh.outputs.stderr }}'
