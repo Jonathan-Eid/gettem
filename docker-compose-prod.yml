@@ -38,9 +38,9 @@ services:
       - postgres
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.gettem.rule=Host(`dashboard.joneid.dev`)"
-      - "traefik.http.routers.gettem.entrypoints=web"
-      - "traefik.http.services.gettem.loadbalancer.server.port=1337"
+      - "traefik.http.routers.strapi.rule=Host(`dashboard.joneid.dev`)"
+      - "traefik.http.routers.strapi.entrypoints=web"
+      - "traefik.http.services.strapi.loadbalancer.server.port=1337"
 
   postgres:
     image: postgres
