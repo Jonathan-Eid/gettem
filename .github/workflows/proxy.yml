@@ -34,6 +34,15 @@ jobs:
         workload_identity_provider: 'projects/527783132744/locations/global/workloadIdentityPools/gettem-github/providers/github'
         service_account: 'gettem-github-actions@portfolio-website-414517.iam.gserviceaccount.com'
 
+    - id: 'git update'
+        uses: 'google-github-actions/ssh-compute@v1'
+        with:
+          instance_name: 'instance-20240216-171943'
+          zone: 'us-central1-a'
+          user: 'github'
+          ssh_private_key: '${{ secrets.GCP_SSH }}'
+          command: "cd ~/gettem; git fetch origin prod; git reset --hard FETCH_HEAD; git clean -df"
+
     - id: 'compute-ssh'
       uses: 'google-github-actions/ssh-compute@v1'
       with:
