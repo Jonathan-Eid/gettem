@@ -73,7 +73,7 @@ jobs:
         zone: 'us-central1-a'
         user: 'github'
         ssh_private_key: '${{ secrets.GCP_SSH }}'
-        script: ~/gettem/traefik.sh
+        script: '${{ github.workspace }}/traefik.sh'
           
 
     # Example of using the output
