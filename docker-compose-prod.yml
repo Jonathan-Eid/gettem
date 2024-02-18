@@ -1,0 +1,67 @@
+# https://medium.com/trabe/map-subdomains-to-docker-containers-with-traefik-efd6aa66e073
+version: "3"
+
+services:
+
+  gettem:
+
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+      args: 
+        REACT_APP_STRAPI_URL: ${STRAPI_URL}
+        REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
+    ports:
+      - "3000:80"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gettem.rule=Host(`joneid.dev`)"
+      - "traefik.http.routers.gettem.entrypoints=web"
+      - "traefik.http.services.gettem.loadbalancer.server.port=3000"
+
+
+
+  strapi:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.prod
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: gettem
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: ${DB_USER}
+      DATABASE_PASSWORD: ${DB_PASS}
+    ports:
+      - "1337:1337/"
+    depends_on:
+      - postgres
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.strapi.rule=Host(`dashboard.joneid.dev`)"
+      - "traefik.http.routers.strapi.entrypoints=web"
+      - "traefik.http.services.strapi.loadbalancer.server.port=1337"
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: gettem
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  traefik:
+    image: "traefik:v2.10"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
