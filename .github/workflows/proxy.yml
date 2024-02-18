@@ -1,0 +1,25 @@
+name: Production Deployment
+
+# This workflow triggers whenever there's a push to the 'prod' branch. 
+on:
+    workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # You can choose a suitable runner environment 
+    steps:
+      - uses: actions/checkout@v3  # Check out the repo
+      
+      # ***1. Build Stage***
+      - name: Set up Node.js  # Example using Node.js; adapt to your language
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16  # Choose your Node version
+      - name: Install dependencies
+        run: npm ci  
+      - name: Build the project
+        run: npm run build 
+
+      # ***2. Testing Stage (Optional but highly recommended)***
+      - name: Run tests
+        run: npm test  
