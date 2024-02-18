@@ -26,6 +26,7 @@ jobs:
       with:
         instance_name: 'instance-20240216-171943'
         zone: 'us-central1-a'
+        user: 'github'
         ssh_private_key: '${{ secrets.GCP_SSH }}'
         command: 'echo Hello world'
 
