@@ -1,2 +1,12 @@
 #!/bin/sh
-docker compose up -f docker-compose-prod.yml -d traefik
+
+
+cd ~/gettem
+
+git fetch origin prod
+
+git reset --hard FETCH_HEAD
+
+git clean -df
+
+docker compose -f docker-compose-prod.yml up -d traefik
