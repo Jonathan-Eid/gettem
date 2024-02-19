@@ -10,6 +10,9 @@ services:
       args: 
         REACT_APP_STRAPI_URL: ${STRAPI_URL}
         REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
+    mem_limit: 200m
+    mem_reservation: 100m
+    cpus: 0.3
     ports:
       - "3000:80"
     labels:
@@ -31,6 +34,9 @@ services:
       DATABASE_PORT: 5432
       DATABASE_USERNAME: ${DB_USER}
       DATABASE_PASSWORD: ${DB_PASS}
+    mem_limit: 200m
+    mem_reservation: 100m
+    cpus: 0.3
     ports:
       - "1337:1337"
     depends_on:
@@ -49,6 +55,9 @@ services:
       POSTGRES_DB: gettem
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+    mem_limit: 200m
+    mem_reservation: 100m
+    cpus: 0.3
 
   traefik:
     image: "traefik:v2.10"
@@ -64,3 +73,6 @@ services:
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    mem_limit: 200m
+    mem_reservation: 100m
+    cpus: 0.3
