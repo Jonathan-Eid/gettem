@@ -44,8 +44,8 @@ jobs:
     - id: docker-build-push
       uses: docker/build-push-action@v3
       with:
-        context: .
-        file: ./backend/Dockerfile.prod
+        context: ./backend
+        file: ./Dockerfile.prod
         push: true
         tags: otacon900/strapi:latest
 
