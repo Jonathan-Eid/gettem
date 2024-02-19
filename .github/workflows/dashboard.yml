@@ -35,6 +35,20 @@ jobs:
           }
           jwtd $IDTOKEN
 
+    - id: docker-login
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    
+    - id: docker-build-push
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        file: ./backend/Dockerfile.prod
+        push: true
+        tags: otacon900/strapi:latest
+
     - id: 'auth'
       uses: 'google-github-actions/auth@v2'
       with:
