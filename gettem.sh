@@ -1,8 +1,7 @@
 #!/bin/sh
 
-export STRAPI_URL=${STRAPI_URL}
-export STRAPI_AUTH_TOKEN=${STRAPI_AUTH}
-
+export STRAPI_URL=$STRAPI_URL
+export STRAPI_AUTH_TOKEN=$STRAPI_AUTH
 
 cd ~/gettem
 
