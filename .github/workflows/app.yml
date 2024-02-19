@@ -65,7 +65,7 @@ jobs:
         zone: 'us-central1-a'
         user: 'github'
         ssh_private_key: '${{ secrets.GCP_SSH }}'
-        script: '${{ github.workspace }}/strapi.sh'
+        script: '${{ github.workspace }}/gettem.sh'
           
 
     - id: 'output'
