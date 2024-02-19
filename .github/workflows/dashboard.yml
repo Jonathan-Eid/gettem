@@ -1,8 +1,5 @@
 name: Strapi Deployment
 
-env:
-  DB_USER: '${{ secrets.DB_USER }}'
-  DB_PASS: '${{ secrets.DB_PASS }}'
 
 # This workflow triggers whenever there's a push to the 'prod' branch. 
 on:
@@ -57,6 +54,9 @@ jobs:
 
     - id: 'start-strapi'
       uses: 'google-github-actions/ssh-compute@v1'
+      env:
+        DB_USER: '${{ secrets.DB_USER }}'
+        DB_PASS: '${{ secrets.DB_PASS }}'
       with:
         instance_name: 'instance-20240216-171943'
         zone: 'us-central1-a'
