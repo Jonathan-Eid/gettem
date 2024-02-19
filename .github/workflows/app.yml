@@ -45,8 +45,8 @@ jobs:
     - id: docker-build-push
       uses: docker/build-push-action@v3
       with:
-        context: .
-        file: ./frontend/Dockerfile.prod
+        context: ./frontend
+        file: ./Dockerfile.prod
         push: true
         tags: otacon900/gettem:latest
 
