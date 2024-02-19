@@ -1,4 +1,8 @@
-name: Production Deployment
+name: Strapi Deployment
+
+env:
+  DB_USER: '${{ secrets.DB_USER }}'
+  DB_PASS: '${{ secrets.DB_PASS }}'
 
 # This workflow triggers whenever there's a push to the 'prod' branch. 
 on:
@@ -19,6 +23,17 @@ jobs:
 
     steps:
     - uses: 'actions/checkout@v4'
+    - name: print oidc token claims
+      run: |
+          IDTOKEN=$(curl -s -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" -H "Accept: application/json; api-version=2.0" -H "Content-Type: application/json"  | jq -r '.value')
+          jwtd() {
+            if [[ -x $(command -v jq) ]]; then
+                jq -R 'split(".") | .[1] | @base64d | fromjson' <<< "${1}" > jwt_claims.json
+                cat jwt_claims.json
+                echo ${{ env.ACTIONS_ID_TOKEN_REQUEST_URL}} 
+            fi
+          }
+          jwtd $IDTOKEN
 
     - id: 'auth'
       uses: 'google-github-actions/auth@v2'
@@ -26,17 +41,19 @@ jobs:
         workload_identity_provider: 'projects/527783132744/locations/global/workloadIdentityPools/gettem-github/providers/github'
         service_account: 'gettem-github-actions@portfolio-website-414517.iam.gserviceaccount.com'
 
-    - id: 'compute-ssh'
+    - id: 'start-strapi'
       uses: 'google-github-actions/ssh-compute@v1'
       with:
         instance_name: 'instance-20240216-171943'
         zone: 'us-central1-a'
         user: 'github'
         ssh_private_key: '${{ secrets.GCP_SSH }}'
-        command: 'echo Hello world'
+        script: '${{ github.workspace }}/strapi.sh'
+          
 
-    # Example of using the output
-    - id: 'test'
+    - id: 'output'
+      if: always()
       run: |-
         echo '${{ steps.compute-ssh.outputs.stdout }}'
         echo '${{ steps.compute-ssh.outputs.stderr }}'
+
