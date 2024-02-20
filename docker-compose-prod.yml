@@ -5,6 +5,12 @@ services:
 
   gettem:
     image: "otacon900/gettem:latest"
+    limits:
+      cpus: '0.3'  # Maximum number of CPUs (can be fractional)
+      memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
+    reservations:
+      cpus: '0.3'  # Maximum number of CPUs (can be fractional)
+      memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
     container_name: "gettem"
     environment: 
       REACT_APP_STRAPI_URL: ${STRAPI_URL}
@@ -23,6 +29,12 @@ services:
 
   strapi:
     image: "otacon900/strapi:latest"
+    limits:
+      cpus: '0.3'  # Maximum number of CPUs (can be fractional)
+      memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
+    reservations:
+      cpus: '0.3'  # Maximum number of CPUs (can be fractional)
+      memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
     container_name: "strapi"
     environment:
       DATABASE_CLIENT: postgres
@@ -51,6 +63,12 @@ services:
 
   postgres:
     image: postgres
+    limits:
+      cpus: '0.3'  # Maximum number of CPUs (can be fractional)
+      memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
+    reservations:
+      cpus: '0.3'  # Maximum number of CPUs (can be fractional)
+      memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
     environment:
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_USER: ${DB_USER}
@@ -61,6 +79,12 @@ services:
 
   traefik:
     image: "traefik:v2.10"
+    limits:
+      cpus: '0.3'  # Maximum number of CPUs (can be fractional)
+      memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
+    reservations:
+      cpus: '0.3'  # Maximum number of CPUs (can be fractional)
+      memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
     container_name: "traefik"
     command:
       #- "--log.level=DEBUG"
