@@ -14,7 +14,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.gettem.rule=Host(`joneid.dev`)"
-      - "traefik.http.routers.gettem.entrypoints=web"
+      - "traefik.http.routers.gettem.entrypoints=websecure"
       - "traefik.http.services.gettem.loadbalancer.server.port=3000"
 
 
@@ -63,8 +63,16 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=jonathaneid98@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+
+
     ports:
       - "80:80"
+      - "443:443"
       - "8080:8080"
     volumes:
+      - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
