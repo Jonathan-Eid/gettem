@@ -67,7 +67,12 @@ jobs:
         zone: 'us-central1-a'
         user: 'github'
         ssh_private_key: '${{ secrets.GCP_SSH }}'
-        command: 'cd ~/gettem;git fetch origin prod;git reset --hard FETCH_HEAD ;git clean -df;DB_USER=${{ secrets.DB_USER }} DB_PASS=${{ secrets.DB_PASS }} APP_KEYS=${{ secrets.APP_KEYS }} ADMIN_JWT_SECRET=${{ secrets.ADMIN_JWT_SECRET }} API_TOKEN_SALT=${{ secrets.API_TOKEN_SALT }} TRANSFER_TOKEN_SALT=${{ secrets.TRANSFER_TOKEN_SALT }} JWT_SECRET=${{ secrets.JWT_SECRET }} docker compose -f ./docker-compose-prod.yml up -d strapi'
+        command: |- 
+                cd ~/gettem
+                git fetch origin prod
+                git reset --hard FETCH_HEAD 
+                git clean -df
+                DB_USER=${{ secrets.DB_USER }} DB_PASS=${{ secrets.DB_PASS }} APP_KEYS=${{ secrets.APP_KEYS }} ADMIN_JWT_SECRET=${{ secrets.ADMIN_JWT_SECRET }} API_TOKEN_SALT=${{ secrets.API_TOKEN_SALT }} TRANSFER_TOKEN_SALT=${{ secrets.TRANSFER_TOKEN_SALT }} JWT_SECRET=${{ secrets.JWT_SECRET }} docker compose -f ./docker-compose-prod.yml up -d strapi
           
 
     - id: 'output'
