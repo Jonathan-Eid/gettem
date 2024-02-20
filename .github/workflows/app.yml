@@ -60,7 +60,7 @@ jobs:
       uses: 'google-github-actions/ssh-compute@v1'
       env:
         STRAPI_URL: '${{ secrets.STRAPI_URL }}'
-        STRAPI_AUTH_TOKEN: 'placeholder'
+        STRAPI_AUTH_TOKEN: '${{ secrets.STRAPI_AUTH_TOKEN }}'
       with:
         instance_name: 'instance-20240216-171943'
         zone: 'us-central1-a'
@@ -73,7 +73,7 @@ jobs:
                   git fetch origin prod
                   git reset --hard FETCH_HEAD
                   git clean -df
-                  STRAPI_URL=${{ secrets.STRAPI_URL }} STRAPI_AUTH_TOKEN=placeholder docker compose -f docker-compose-prod.yml up -d gettem
+                  STRAPI_URL=${{ secrets.STRAPI_URL }} STRAPI_AUTH_TOKEN=${{ secrets.STRAPI_AUTH_TOKEN }} docker compose -f docker-compose-prod.yml up -d gettem
           
 
     - id: 'output'
