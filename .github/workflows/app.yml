@@ -1,8 +1,6 @@
 name: Gettem Deployment
 
-env:
-  STRAPI_URL: '${{ secrets.STRAPI_URL }}'
-  STRAPI_AUTH_TOKEN: 'placeholder'
+
 
 # This workflow triggers whenever there's a push to the 'prod' branch. 
 on:
@@ -36,19 +34,19 @@ jobs:
           jwtd $IDTOKEN
 
 
-    - id: docker-login
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    # - id: docker-login
+    #   uses: docker/login-action@v3
+    #   with:
+    #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+    #     password: ${{ secrets.DOCKERHUB_PASSWORD }}
     
-    - id: docker-build-push
-      uses: docker/build-push-action@v3
-      with:
-        context: ./frontend
-        file: ./frontend/Dockerfile.prod
-        push: true
-        tags: otacon900/gettem:latest
+    # - id: docker-build-push
+    #   uses: docker/build-push-action@v3
+    #   with:
+    #     context: ./frontend
+    #     file: ./frontend/Dockerfile.prod
+    #     push: true
+    #     tags: otacon900/gettem:latest
 
     - id: 'auth'
       uses: 'google-github-actions/auth@v2'
@@ -60,12 +58,22 @@ jobs:
 
     - id: 'start-gettem'
       uses: 'google-github-actions/ssh-compute@v1'
+      env:
+        STRAPI_URL: '${{ secrets.STRAPI_URL }}'
+        STRAPI_AUTH_TOKEN: 'placeholder'
       with:
         instance_name: 'instance-20240216-171943'
         zone: 'us-central1-a'
         user: 'github'
         ssh_private_key: '${{ secrets.GCP_SSH }}'
-        script: '${{ github.workspace }}/gettem.sh'
+        command: |-
+                  export STRAPI_URL=$STRAPI_URL
+                  export STRAPI_AUTH_TOKEN=$STRAPI_AUTH
+                  cd ~/gettem
+                  git fetch origin prod
+                  git reset --hard FETCH_HEAD
+                  git clean -df
+                  STRAPI_URL=${{ secrets.STRAPI_URL }} STRAPI_AUTH_TOKEN=placeholder docker compose -f docker-compose-prod.yml up -d gettem
           
 
     - id: 'output'
