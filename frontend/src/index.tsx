@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "swipe",
-        element: <Swipe />
+        element: <Swipe /> 
       },
       {
         path: "gallery",
