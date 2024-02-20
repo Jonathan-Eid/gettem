@@ -16,6 +16,8 @@ services:
       - "traefik.http.routers.gettem.rule=Host(`joneid.dev`)"
       - "traefik.http.routers.gettem.entrypoints=websecure"
       - "traefik.http.services.gettem.loadbalancer.server.port=3000"
+      - "traefik.http.routers.gettem.tls.certresolver=myresolver"
+
 
 
 
@@ -43,6 +45,8 @@ services:
       - "traefik.http.routers.strapi.rule=Host(`dashboard.joneid.dev`)"
       - "traefik.http.routers.strapi.entrypoints=web"
       - "traefik.http.services.strapi.loadbalancer.server.port=1337"
+      - "traefik.http.routers.strapi.tls.certresolver=myresolver"
+
 
   postgres:
     image: postgres
