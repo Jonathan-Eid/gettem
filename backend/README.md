@@ -13,7 +13,7 @@ yarn develop
 ```
 
 ### `start`
- 
+  
 Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html#strapi-start)
 
 ```
