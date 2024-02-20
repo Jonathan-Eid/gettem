@@ -10,12 +10,12 @@ services:
       REACT_APP_STRAPI_URL: ${STRAPI_URL}
       REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
     ports:
-      - "3000:80"
+      - "5000:5000"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.gettem.rule=Host(`joneid.dev`)"
       - "traefik.http.routers.gettem.entrypoints=websecure"
-      - "traefik.http.services.gettem.loadbalancer.server.port=80"
+      - "traefik.http.services.gettem.loadbalancer.server.port=5000"
       - "traefik.http.routers.gettem.tls.certresolver=myresolver"
 
 
