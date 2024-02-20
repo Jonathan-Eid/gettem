@@ -9,10 +9,10 @@ services:
       resources:
         limits:
           cpus: '0.1'  # Maximum number of CPUs (can be fractional)
-          memory: 50M # Maximum memory (M for Megabytes, G for Gigabytes)
+          memory: 20M # Maximum memory (M for Megabytes, G for Gigabytes)
         reservations:
           cpus: '0.1'  # Maximum number of CPUs (can be fractional)
-          memory: 50M # Maximum memory (M for Megabytes, G for Gigabytes)
+          memory: 20M # Maximum memory (M for Megabytes, G for Gigabytes)
     container_name: "gettem"
     environment: 
       REACT_APP_STRAPI_URL: ${STRAPI_URL}
