@@ -15,7 +15,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.gettem.rule=Host(`joneid.dev`)"
       - "traefik.http.routers.gettem.entrypoints=websecure"
-      - "traefik.http.services.gettem.loadbalancer.server.port=3000"
+      - "traefik.http.services.gettem.loadbalancer.server.port=80"
       - "traefik.http.routers.gettem.tls.certresolver=myresolver"
 
 
@@ -36,6 +36,7 @@ services:
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
       JWT_SECRET: ${JWT_SECRET}
       TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
+      URL: ${STRAPI_URL}
     ports:
       - "1337:1337"
     depends_on:
@@ -43,7 +44,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.strapi.rule=Host(`dashboard.joneid.dev`)"
-      - "traefik.http.routers.strapi.entrypoints=web"
+      - "traefik.http.routers.strapi.entrypoints=websecure"
       - "traefik.http.services.strapi.loadbalancer.server.port=1337"
       - "traefik.http.routers.strapi.tls.certresolver=myresolver"
 
@@ -71,8 +72,6 @@ services:
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
       - "--certificatesresolvers.myresolver.acme.email=jonathaneid98@gmail.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
-
-
     ports:
       - "80:80"
       - "443:443"
