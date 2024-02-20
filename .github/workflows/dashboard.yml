@@ -62,17 +62,7 @@ jobs:
         zone: 'us-central1-a'
         user: 'github'
         ssh_private_key: '${{ secrets.GCP_SSH }}'
-        command: |  
-                    "#!/bin/sh
-                    export DB_USER=${{ secrets.DB_USER }}
-                    export DB_PASS=${{ secrets.DB_PASS }}
-                    ls
-                    cd ~/gettem
-                    git fetch origin prod
-                    git reset --hard FETCH_HEAD 
-                    git clean -df
-                    ls"
-# DB_USER=${{ secrets.DB_USER }} DB_PASS=${{ secrets.DB_PASS }} docker compose -f ./docker-compose-prod.yml up -d strapi
+        command: "export DB_USER=${{ secrets.DB_USER }};export DB_PASS=${{ secrets.DB_PASS }};ls;cd ~/gettem;git fetch origin prod;git reset --hard FETCH_HEAD ;git clean -df;ls;DB_USER=${{ secrets.DB_USER }} DB_PASS=${{ secrets.DB_PASS }} docker compose -f ./docker-compose-prod.yml up -d strapi"
           
 
     - id: 'output'
