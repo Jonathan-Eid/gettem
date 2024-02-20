@@ -73,9 +73,9 @@ jobs:
                   git fetch origin prod
                   git reset --hard FETCH_HEAD
                   git clean -df
-                  docker-compose -f ./docker-compose-prod.yml pull gettem
                   STRAPI_URL=${{ secrets.STRAPI_URL }} STRAPI_AUTH_TOKEN=${{ secrets.STRAPI_AUTH_TOKEN }} docker compose -f docker-compose-prod.yml up -d gettem
-          
+         # docker-compose -f ./docker-compose-prod.yml pull gettem
+     
 
     - id: 'output'
       if: always()

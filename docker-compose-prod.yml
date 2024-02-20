@@ -8,22 +8,22 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.3'  # Maximum number of CPUs (can be fractional)
-          memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
+          cpus: '0.1'  # Maximum number of CPUs (can be fractional)
+          memory: 20M # Maximum memory (M for Megabytes, G for Gigabytes)
         reservations:
-          cpus: '0.3'  # Maximum number of CPUs (can be fractional)
-          memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
+          cpus: '0.1'  # Maximum number of CPUs (can be fractional)
+          memory: 20M # Maximum memory (M for Megabytes, G for Gigabytes)
     container_name: "gettem"
     environment: 
       REACT_APP_STRAPI_URL: ${STRAPI_URL}
       REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
     ports:
-      - "5000:5000"
+      - "3000:3000"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.gettem.rule=Host(`joneid.dev`)"
       - "traefik.http.routers.gettem.entrypoints=websecure"
-      - "traefik.http.services.gettem.loadbalancer.server.port=5000"
+      - "traefik.http.services.gettem.loadbalancer.server.port=3000"
       - "traefik.http.routers.gettem.tls.certresolver=myresolver"
 
 
