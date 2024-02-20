@@ -44,7 +44,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.strapi.rule=Host(`dashboard.joneid.dev`)"
-      - "traefik.http.routers.strapi.entrypoints=web"
+      - "traefik.http.routers.strapi.entrypoints=websecure"
       - "traefik.http.services.strapi.loadbalancer.server.port=1337"
       - "traefik.http.routers.strapi.tls.certresolver=myresolver"
 
