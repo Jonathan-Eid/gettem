@@ -32,19 +32,19 @@ jobs:
           }
           jwtd $IDTOKEN
 
-    # - id: docker-login
-    #   uses: docker/login-action@v3
-    #   with:
-    #     username: ${{ secrets.DOCKERHUB_USERNAME }}
-    #     password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    - id: docker-login
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
     
-    # - id: docker-build-push
-    #   uses: docker/build-push-action@v3
-    #   with:
-    #     context: ./backend
-    #     file: ./backend/Dockerfile.prod
-    #     push: true
-    #     tags: otacon900/strapi:latest
+    - id: docker-build-push
+      uses: docker/build-push-action@v3
+      with:
+        context: ./backend
+        file: ./backend/Dockerfile.prod
+        push: true
+        tags: otacon900/strapi:latest
 
     - id: 'auth'
       uses: 'google-github-actions/auth@v2'
@@ -62,7 +62,7 @@ jobs:
         zone: 'us-central1-a'
         user: 'github'
         ssh_private_key: '${{ secrets.GCP_SSH }}'
-        command: 'export DB_USER=${{ secrets.DB_USER }};export DB_PASS=${{ secrets.DB_PASS }};ls;cd ~/gettem;git fetch origin prod;git reset --hard FETCH_HEAD ;git clean -df;ls;DB_USER=${{ secrets.DB_USER }} DB_PASS=${{ secrets.DB_PASS }} docker compose -f ./docker-compose-prod.yml up -d strapi'
+        command: 'export DB_USER=${{ secrets.DB_USER }};export DB_PASS=${{ secrets.DB_PASS }};cd ~/gettem;git fetch origin prod;git reset --hard FETCH_HEAD ;git clean -df;DB_USER=${{ secrets.DB_USER }} DB_PASS=${{ secrets.DB_PASS }} docker compose -f ./docker-compose-prod.yml up -d strapi'
           
 
     - id: 'output'
