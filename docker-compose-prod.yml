@@ -81,10 +81,10 @@ services:
     image: "traefik:v2.10"
     limits:
       cpus: '0.3'  # Maximum number of CPUs (can be fractional)
-      memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
+      memory: 50M # Maximum memory (M for Megabytes, G for Gigabytes)
     reservations:
-      cpus: '0.3'  # Maximum number of CPUs (can be fractional)
-      memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
+      cpus: '0.1'  # Maximum number of CPUs (can be fractional)
+      memory: 50M # Maximum memory (M for Megabytes, G for Gigabytes)
     container_name: "traefik"
     command:
       #- "--log.level=DEBUG"
