@@ -9,5 +9,5 @@ RUN yarn build
 RUN npm i -g serve
 
 
-EXPOSE 5000
-CMD ["serve", "-s", "build"] 
+EXPOSE 3000
+CMD ["serve", '-l', "3000" ,"-s", "build"] 
