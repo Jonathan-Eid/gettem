@@ -1,7 +1,9 @@
 FROM node:16-alpine
 
 WORKDIR /gettem
-COPY build/ .
+COPY build build
+RUN yarn global add serve
+RUN ls
 
 EXPOSE 3000
-CMD ["serve", '-l', "3000" ,"-s", "build"]  
+CMD ["serve","-s", "build", "-p", "3000"]  
