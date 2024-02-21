@@ -4,7 +4,12 @@ version: "3"
 services:
 
   gettem:
-    image: "otacon900/gettem:latest"
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+      args: 
+        REACT_APP_STRAPI_URL: ${STRAPI_URL}
+        REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
     deploy:
       resources:
         limits:
@@ -14,9 +19,6 @@ services:
           cpus: '0.1'  # Maximum number of CPUs (can be fractional)
           memory: 20M # Maximum memory (M for Megabytes, G for Gigabytes)
     container_name: "gettem"
-    environment: 
-      REACT_APP_STRAPI_URL: ${STRAPI_URL}
-      REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
     ports:
       - "3000:3000"
     labels:

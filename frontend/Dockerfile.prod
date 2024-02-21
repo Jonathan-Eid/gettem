@@ -1,13 +1,10 @@
-FROM node:16-alpine AS build
+FROM node:16-alpine
 
-WORKDIR /app
-COPY package*.json ./
-RUN npm rebuild node-sass
-RUN yarn
-COPY . ./
-RUN yarn build
-RUN npm i -g serve
+WORKDIR gettem
+COPY . .
 
+ARG REACT_APP_STRAPI_URL
+ENV REACT_APP_STRAPI_URL $REACT_APP_STRAPI_URL
 
 EXPOSE 3000
 CMD ["serve", '-l', "3000" ,"-s", "build"]  

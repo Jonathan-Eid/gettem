@@ -1,2 +1,4 @@
 .envrc
 pgdata
+letsencrypt
+.github/workflows.bak
