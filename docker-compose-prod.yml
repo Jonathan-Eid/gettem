@@ -4,7 +4,12 @@ version: "3"
 services:
 
   gettem:
-    image: "otacon900/gettem:latest"
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+      args: 
+        REACT_APP_STRAPI_URL: ${STRAPI_URL}
+        REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
     deploy:
       resources:
         limits:
@@ -14,11 +19,11 @@ services:
           cpus: '0.1'  # Maximum number of CPUs (can be fractional)
           memory: 20M # Maximum memory (M for Megabytes, G for Gigabytes)
     container_name: "gettem"
-    environment: 
-      REACT_APP_STRAPI_URL: ${STRAPI_URL}
-      REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
     ports:
       - "3000:3000"
+    volumes:
+       - ./frontend:/gettem
+       - /node_modules
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.gettem.rule=Host(`joneid.dev`)"
@@ -30,7 +35,9 @@ services:
 
 
   strapi:
-    image: "otacon900/strapi:latest"
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile.dev
     deploy:
       resources:
         limits:
@@ -53,6 +60,8 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
       URL: ${STRAPI_URL}
+    volumes:
+      - ./backend:/app
     ports:
       - "1337:1337"
     depends_on:

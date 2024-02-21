@@ -38,7 +38,7 @@ services:
       - postgres
 
   postgres:
-    image: postgres
+    image: postgres:14
     environment:
       POSTGRES_PASSWORD: gettem
       POSTGRES_USER: juna
