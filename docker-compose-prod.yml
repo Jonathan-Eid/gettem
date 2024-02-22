@@ -30,14 +30,6 @@ services:
     build: 
       context: ./backend
       dockerfile: Dockerfile.prod
-    deploy:
-      resources:
-        limits:
-          cpus: '0.3'  # Maximum number of CPUs (can be fractional)
-          memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
-        reservations:
-          cpus: '0.3'  # Maximum number of CPUs (can be fractional)
-          memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
     container_name: "strapi"
     environment:
       DATABASE_CLIENT: postgres
@@ -68,14 +60,6 @@ services:
 
   postgres:
     image: postgres
-    deploy:
-      resources:
-        limits:
-          cpus: '0.2'  # Maximum number of CPUs (can be fractional)
-          memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
-        reservations:
-          cpus: '0.2'  # Maximum number of CPUs (can be fractional)
-          memory: 200M # Maximum memory (M for Megabytes, G for Gigabytes)
     environment:
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_USER: ${DB_USER}
