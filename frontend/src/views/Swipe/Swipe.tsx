@@ -86,7 +86,6 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
 
                 <div className='card-container'>
                     {cards.current.map((card:any,i) => {
-
                           return <TinderCard 
                           ref={childRefs[i]}
                           key={card.attributes.name}

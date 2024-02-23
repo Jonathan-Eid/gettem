@@ -30,6 +30,7 @@ services:
       DATABASE_PORT: 5432
       DATABASE_USERNAME: juna
       DATABASE_PASSWORD: gettem
+      URL: http://localhost:1337
     volumes:
       - ./backend:/app
     ports:
