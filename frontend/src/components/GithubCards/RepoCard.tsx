@@ -77,7 +77,7 @@ const RepoCard: FC<Props> = ({children,  ...props}) => {
 
     })()
 
-  }),[])
+  }),[props.repo])
 
 
     return <div style={props.style} className="repo-card github-card"><div className="header">
