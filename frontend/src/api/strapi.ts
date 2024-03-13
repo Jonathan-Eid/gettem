@@ -14,7 +14,7 @@ strapi.defaults.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN}`
 export async function getCards() {
 
     try{
-        const response = await strapi.get(`/api/cards?populate=images`)
+        const response = await strapi.get(`/api/cards?populate=images&sort=order:desc`) 
         return response.data
     } catch (error) {
         console.log(error)
