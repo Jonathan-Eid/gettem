@@ -806,6 +806,7 @@ export interface ApiCardCard extends Schema.CollectionType {
     subtitle: Attribute.String;
     description: Attribute.RichText;
     intro: Attribute.RichText;
+    order: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

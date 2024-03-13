@@ -48,6 +48,9 @@
     },
     "intro": {
       "type": "richtext"
+    },
+    "order": {
+      "type": "integer"
     }
   }
 }
