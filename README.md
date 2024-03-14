@@ -56,7 +56,7 @@ docker compose up -d strapi
     - Click on the "Card","Github", "Resume", "Upload" Tabs and select "find" & "findOne"
     - Click on "Content-type-builder" Tab and select "getContentTypes" & "getContentType"
 - Save your token and copy the token id
-- `echo export STRAPI_AUTH=REPLACE_WITH_TOKEN_ID >> .env`
+- `echo export STRAPI_AUTH_TOKEN=REPLACE_WITH_TOKEN_ID >> .env`
 - `source .env`
 
 4. ##### Start React Frontend
