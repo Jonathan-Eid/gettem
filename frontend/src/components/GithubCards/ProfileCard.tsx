@@ -30,15 +30,13 @@ const ProfileCard: FC<Props> = ({children,  ...props}) => {
 
         let user = await getUser(props.user)
 
-        console.log(user)
-
         setName(props.user)
 
         setLogin(props.user)
 
-        setPublicRepos(numberic(user.public_repos))
-        setPublicGists(numberic(user.public_gists))
-        setFollowers(numberic(user.followers))
+        setPublicRepos(numberic(user.public_repos)  || 0)
+        setPublicGists(numberic(user.public_gists)  || 0)
+        setFollowers(numberic(user.followers)  || 0)
         setAvatar(user.avatar_url)
 
 
