@@ -43,7 +43,7 @@ docker compose up -d strapi
 
 3. ##### Create API Token for the Frontend
 
-- Navigate to your strapi instad @ localhost:1337 
+- Navigate to your strapi instance @ localhost:1337 
 - Create your admin account
 - Navigate to Settings > API Tokens as shown below:
 
