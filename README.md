@@ -43,7 +43,7 @@ docker compose up -d strapi
 
 3. ##### Create API Token for the Frontend
 
-- Navigate to your strapi instad @ localhost:1337 
+- Navigate to your strapi instance @ localhost:1337 
 - Create your admin account
 - Navigate to Settings > API Tokens as shown below:
 
@@ -56,7 +56,7 @@ docker compose up -d strapi
     - Click on the "Card","Github", "Resume", "Upload" Tabs and select "find" & "findOne"
     - Click on "Content-type-builder" Tab and select "getContentTypes" & "getContentType"
 - Save your token and copy the token id
-- `echo export STRAPI_AUTH=REPLACE_WITH_TOKEN_ID >> .env`
+- `echo export STRAPI_AUTH_TOKEN=REPLACE_WITH_TOKEN_ID >> .env`
 - `source .env`
 
 4. ##### Start React Frontend
