@@ -64,3 +64,5 @@ docker compose up -d strapi
 ```
 docker compose up -d gettem
 ```
+- Navigate to the React app @ localhost:3000 
+
