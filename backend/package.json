@@ -14,13 +14,14 @@
     "@strapi/plugin-i18n": "4.20.0",
     "@strapi/plugin-users-permissions": "4.20.0",
     "@strapi/strapi": "4.20.0",
+    "pg": "8.6.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^5.3.4",
-    "styled-components": "^5.3.3",
-    "pg": "8.6.0" 
+    "strapi-plugin-rest-cache": "^4.2.8",
+    "styled-components": "^5.3.3"
   },
-  "author": { 
+  "author": {
     "name": "A Strapi developer"
   },
   "strapi": {
@@ -29,7 +30,6 @@
   "engines": {
     "node": ">=18.x.x",
     "npm": ">=6.0.0"
-  }, 
+  },
   "license": "MIT"
 }
- 

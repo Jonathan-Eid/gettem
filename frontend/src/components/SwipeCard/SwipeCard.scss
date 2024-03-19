@@ -16,6 +16,9 @@
     background-size: cover;
     background-position: center;
     box-shadow: 1px 4px 2px -2px gray;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 
   &:after{
     padding-bottom: 100%;
@@ -283,9 +286,14 @@ background-image: url(data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgeG1sbnM9
 
 }
 
+.carousel-item{
+  justify-content: center;
+}
+
 .carousel-img{
 
-  width: 100%;
+  object-fit: cover;
+  width: 100vw;
 
 }
 

@@ -32,7 +32,7 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
   
     return <>
             <Card className="card-has-bg" text='white' >
-              <Card.Img as={LazyLoadImage} wrapperClassName="effect" effect='blur' src={STRAPI_URL+(card_images[0].attributes.formats.large ? card_images[0].attributes.formats.large.url : card_images[0].attributes.url)}  />
+              <Card.Img as={LazyLoadImage} wrapperClassName="effect" effect='blur' src={STRAPI_URL+(card_images[0].attributes.formats.large ? card_images[0].attributes.formats.large.url : card_images[0].attributes.url)} />
               <Card.ImgOverlay></Card.ImgOverlay>  
               <Card.Body style={{display: 'flex', flexDirection: 'column', justifyContent: "end"}}>
                 <Card.Subtitle className="mb-2">
@@ -69,13 +69,10 @@ const SwipeCard: FC<Props> = ({children,  ...props}) => {
                         return <Carousel.Item className="carousel-item"> 
                         
                           <LazyLoadImage
-                              style={{objectFit:"cover"}}
                               className="carousel-img"
                               src={STRAPI_URL+(image.attributes.formats.large ? image.attributes.formats.large.url : image.attributes.url)}
-                              
-                              effect='blur'
+                              effect='blur' 
                           /> 
-
                         
                         </Carousel.Item>
                       })}
