@@ -5,21 +5,21 @@ The portfolio website source code for https://joneid.dev
 
 <br>
 
-#### Prerequisities  
+### Prerequisities  
 
 - Docker
 
 <br>
 
-#### Get Started
-1. ##### Clone Repo and Navigate to root dir
+### Get Started
+1. #### Clone Repo and Navigate to root dir
 ```
 git clone https://github.com/Jonathan-Eid/gettem.git
 cd gettem
 ```
 
 
-2. ##### Initiate .env variables
+2. #### Initiate .env variables
 ```
 cat << EOF >> .env
 
@@ -35,13 +35,13 @@ EOF
 source .env
 ```
 
-2. ##### Start Strapi
+2. #### Start Strapi
 
 ```
 docker compose up -d strapi
 ```
 
-3. ##### Create API Token for the Frontend
+3. #### Create API Token for the Frontend
 
 - Navigate to your strapi instance @ localhost:1337 
 - Create your admin account
@@ -59,8 +59,10 @@ docker compose up -d strapi
 - `echo export STRAPI_AUTH_TOKEN=REPLACE_WITH_TOKEN_ID >> .env`
 - `source .env`
 
-4. ##### Start React Frontend
+4. #### Start React Frontend
 
 ```
 docker compose up -d gettem
 ```
+- Navigate to the React app @ localhost:3000 
+
