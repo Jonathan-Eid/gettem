@@ -7,4 +7,4 @@ ARG STRAPI_URL
 ENV STRAPI_URL $STRAPI_URL
 
 COPY . .
-CMD ["node index.js"]  
+CMD ["node", "index.js"]  
