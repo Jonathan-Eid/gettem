@@ -2,8 +2,7 @@ FROM node:18
 
 WORKDIR /app
 # COPY . .
-RUN npm i -g strapi
-RUN yarn
+RUN npm i -g @strapi/strapi@4.20.0
 # RUN yarn build
 
 EXPOSE 1337
