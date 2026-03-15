@@ -44,6 +44,7 @@ source .env
 1. #### Start Strapi
 
 ```
+./install-deps.sh
 docker compose up -d strapi
 ```
 

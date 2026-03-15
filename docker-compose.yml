@@ -30,7 +30,11 @@ services:
       DATABASE_PORT: 5432
       DATABASE_USERNAME: juna
       DATABASE_PASSWORD: gettem
-      URL: http://localhost:1337
+      URL: ${URL:-http://localhost:1337}
+      STRAPI_URL: ${STRAPI_URL:-http://localhost:1337}
+      APP_KEYS: ${APP_KEYS}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
     volumes:
       - ./backend:/app
     ports:
