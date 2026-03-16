@@ -21,10 +21,8 @@ const Gallery: FC<Props> = ({children, ...rest}) => {
     },[])
 
 
-    return <div className="justify-content-center flex-column d-flex" style={{justifyItems: 'center', alignItems: 'center'}} >
-
-                <iframe className='resume' style={{width:"100vw", height: "calc(100vh - 77px)", zIndex: 1000}} src={`${STRAPI_URL}${resume}`} />
-
+    return <div style={{width: "100vw", height: "calc(100vh - 64px)", position: "relative", zIndex: 1}}>
+                <iframe className='resume' style={{width:"100%", height: "100%", border: 'none', display: 'block'}} src={`${STRAPI_URL}${resume}`} />
             </div>
 }
 

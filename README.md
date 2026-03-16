@@ -28,7 +28,7 @@ cd gettem
 ```
 cat << EOF >> .env
 
-export ADMIN_JWT_SECRET=YehBmC8QPFQ13SCjGyKd ## these are not really what I have in prod, I'm security minded
+export ADMIN_JWT_SECRET=YehBmC8QPFQ13SCjGyKd ## these are not really what I have in prod, I'm security minded ;)
 export API_TOKEN_SALT=pYpQ60YQD3GbQKQdzi5iEd
 export APP_KEYS=[bZtVyR443Vo8BhHcKViHgBsVWCcIbYw0FPGYOB]
 export STRAPI_URL=http://localhost:1337

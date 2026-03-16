@@ -1,177 +1,279 @@
-.swipe{
-
-    position: absolute;
-    overflow: hidden;
-
-  
-  }
-
-.animation_trigger{
-  animation: swipe-and-return 1.4s ease-in; 
+.swipe {
+  position: absolute;
+  overflow: hidden;
 }
 
-@keyframes swipe-and-return {
-  0% { 
-    transform: translateX(0); 
+
+.swipe-container {
+  min-width: 100vw;
+  height: calc(100vh - 64px);
+  gap: 20px;
+}
+
+.card-container {
+  position: relative;
+  width: unquote("clamp(300px, 85vw, 460px)");
+  height: unquote("clamp(420px, 62vh, 640px)");
+  z-index: 2;
+
+  @media (min-width: 768px) {
+    width: unquote("clamp(360px, 45vw, 480px)");
+    height: unquote("clamp(480px, 65vh, 700px)");
   }
-  20% { 
-    transform: translateX(50px) rotate(5deg); 
-  } /* Adjust swipe distance as needed */
-  40% { 
-    transform: translateX(400px) rotate(25deg); 
-  } /* Hold the swipe briefly */
-  60% { 
-    transform: translateX(0); 
-    // offset-path: ray(90deg);
+}
+
+.card-container-hint {
+  animation: cardDrift 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.5s 2;
+}
+
+@keyframes cardDrift {
+  0% {
+    transform: translateX(0) rotate(0deg);
   }
-  75% { 
-    transform: translateX(-50px) rotate(-5deg); 
-  } /* Adjust swipe distance as needed */
-  90% { 
-    transform: translateX(-300px) rotate(-20deg); 
+  8% {
+    transform: translateX(0) rotate(0deg);
   }
-  100%{
+  14% {
+    transform: translateX(4px) rotate(0.3deg);
+  }
+  50% {
+    transform: translateX(50px) rotate(3deg);
+  }
+  60% {
+    transform: translateX(50px) rotate(3deg);
+  }
+  75% {
+    transform: translateX(-4px) rotate(-0.3deg);
+  }
+  85%, 100% {
     transform: translateX(0) rotate(0deg);
   }
 }
 
-  .swipe-container{
 
-    min-width: 100vw;
-    height: calc(100vh - 77px);
-    
+// End message when all cards swiped
+.end-message-container {
+  z-index: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: unquote("clamp(280px, 80vw, 420px)");
+  height: unquote("clamp(400px, 62vh, 640px)");
+  border-radius: 24px;
+  background: linear-gradient(160deg, rgba(255, 240, 245, 0.7) 0%, rgba(245, 220, 235, 0.6) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 20px 60px rgba(206, 81, 133, 0.1);
+  animation: endCardFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.end-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-family: 'Kanit';
+  width: 85%;
+}
+
+.end-message-emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 12px;
+  animation: emojiBounce 2s ease-in-out infinite;
+}
+
+@keyframes emojiBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.end-message-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d1035;
+  margin-bottom: 4px;
+}
+
+.end-message-subtitle {
+  font-size: 0.9rem;
+  color: #7c5a8a;
+  margin-bottom: 28px;
+}
+
+.end-message-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.end-btn {
+  font-family: 'Kanit';
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 32px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 200px;
+  justify-content: center;
+}
+
+.end-btn-primary {
+  background: linear-gradient(135deg, #c084fc, #a855f7);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(168, 85, 247, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(168, 85, 247, 0.4);
   }
 
+  &:active {
+    transform: translateY(0);
+  }
+}
 
+.end-btn-secondary {
+  background: rgba(255, 255, 255, 0.6);
+  color: #5b2175;
+  border: 1px solid rgba(192, 132, 252, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 
-
-  .card-container {
-    width: 100vw;
-    max-width: 400px;
-    height: 70vh;
-    max-height: 650px;
-
+  &:hover {
+    background: rgba(255, 255, 255, 0.85);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   }
 
-  .deck-container {
-    z-index: 0;
+  &:active {
+    transform: translateY(0);
   }
+}
 
-  .btn-circle-xl {
-    width: 70px;
-    height: 70px;
-    line-height: 70px;
-    font-size: 1.3rem;
-    line-height: 45px;
-    text-align: center;
-    padding: 0;
-    border-radius: 50%;
-  }
+a,
+a:visited {
+  color: black !important;
+}
 
-  .btn-spacer{
-    padding-left: (1rem * 3) !important;
+a:hover {
+  color: grey !important;
+}
 
-    @media (max-width: 576px) {
-      padding-left: (1rem * .5) !important;
-      // min-height: 350px;
-  
-    }
-    
-    @media (max-width: 420px) {
-      padding-left: (1rem * .5) !important;
-      // min-height: 300px;
-  
-    }
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
 
+@keyframes endCardFadeIn {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.95); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
 
-  
-  .btn-lightpink {
-    margin: 10;
-    overflow-wrap: break-word;
-    color: black;
-    background-color: lightpink;
-    box-shadow: 2px 2px 6px black;
-  }
+// =============================================
+// Swipe Hint — Dot drag tutorial
+// =============================================
+.swipe-hint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 5;
+  overflow: visible;
+  animation: hintFadeOut 0.5s ease 5s forwards;
+}
 
+.swipe-hint-dot {
+  position: absolute;
+  top: 45%;
+  left: 55%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.15),
+    0 0 16px rgba(192, 132, 252, 0.35);
+  opacity: 0;
+  animation: dotSwipe 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.5s 2;
+  transform: translate(-50%, -50%) scale(0.5);
 
-  .btn-lightpink:focus {
-    box-shadow: 2px 2px 6px black;
-  }
-
-  .btn-lightpink:active {
-    background-color: rgb(235, 159, 170);
-    box-shadow: 2px 2px 6px white;
-  }
-
-
-
-
-  .btn-lavenderblush {
-    margin: 10;
-    overflow-wrap: break-word;
-    color: black;
-    background-color: lavenderblush;
-    box-shadow: 2px 2px 6px black;
-  }
-
-  .btn-lavenderblush:focus {
-    box-shadow: 2px 2px 6px black;
-  }
-
-  .btn-lavenderblush:active {
-    background-color: rgb(235, 215, 221);
-    box-shadow: 2px 2px 6px white;
-  }
-  
-
-  .end-message{
-   
+  // Drag trail
+  &::after {
+    content: '';
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    font-family: 'Kanit';
-
+    right: 100%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.5), transparent);
+    animation: dotTrail 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.5s 2;
   }
+}
 
-  .end-message-container{
-    z-index: 100;
-    opacity: 1;  
-    animation: fadeIn 2s ease-in; 
-    border: none;
-    width: 80vw;
-    max-width: 400px;
-    height: 70vh;
-    max-height: 650px;
-    border-radius: 20px !important;
-    box-shadow: 1px 4px 2px -2px gray;
-    position: absolute;
-    background-color: rgba(252, 200, 209, 0.719);
-    backdrop-filter: blur(10px);
-
+@keyframes dotSwipe {
+  0% {
+    left: 55%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
   }
-
-
-
-  a,
-  a:visited {
-    color: black !important;
-    
-    
+  8% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
-
-  a:hover {
-    color: grey !important;
+  14% {
+    left: 55%;
+    transform: translate(-50%, -50%) scale(0.92);
   }
+  50% {
+    left: calc(100% + 20px);
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  60% {
+    opacity: 0;
+    left: calc(100% + 40px);
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    left: 55%;
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+}
 
-  @keyframes fadeIn {  
-    from {  
-        opacity:0;  
-    }  
- 
-    to {  
-        opacity:1;  
-    }  
- }
+@keyframes dotTrail {
+  0%, 8% {
+    width: 0;
+    opacity: 0;
+  }
+  14% {
+    width: 0;
+    opacity: 0.5;
+  }
+  50% {
+    width: 70px;
+    opacity: 0.35;
+  }
+  60%, 100% {
+    width: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes hintFadeOut {
+  to { opacity: 0; }
+}

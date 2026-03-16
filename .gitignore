@@ -3,3 +3,6 @@ pgdata
 letsencrypt
 .github/workflows.bak
 gettem.sh
+node_modules
+.playwright-mcp
+package*.json

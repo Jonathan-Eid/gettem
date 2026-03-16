@@ -42,6 +42,18 @@ body{
   background: transparent !important;
 }
 
+.App > header {
+  margin: 0;
+  padding: 0;
+}
+
+.App > body {
+  display: block;
+  margin: 0;
+  padding: 0;
+  padding-top: 64px;
+}
+
 /* #root {
   text-align: center;
   display: flex;
