@@ -1,38 +1,35 @@
-import React, { FC, useEffect, useMemo, useRef, useState } from 'react'
+import React, { FC, useEffect, useMemo, useRef, useState, useCallback } from 'react'
 import SwipeCard from '../../components/SwipeCard'
 import TinderCard from 'react-tinder-card'
 import './Swipe.scss'
 import { getCards } from '../../api/strapi'
-import Button from 'react-bootstrap/Button'
-import {ArrowCounterclockwise, ChevronDoubleRight, ChevronDoubleLeft} from 'react-bootstrap-icons'
+import { ArrowCounterclockwise } from 'react-bootstrap-icons'
+import { useSwipeControls } from '../../context/SwipeControlsContext'
 
 interface Props {
-    // any props that come into the component
     children?: any
 }
 
 
 const Swipe: FC<Props> = ({children, ...rest}) => {
 
-
     const cards = useRef([])
     const [currentIndex, setCurrentIndex] = useState(0)
     const [lastDirection, setLastDirection] = useState("")
     const currentIndexRef = useRef(currentIndex)
+    const [showSwipeHint, setShowSwipeHint] = useState(localStorage.getItem("animated") !== "true")
+    const { setControls } = useSwipeControls()
 
-
-
+    const childRefsRef = useRef<React.RefObject<any>[]>([])
 
     useEffect( () => {
-  
         getCards().then(data => {
             cards.current = data.data
+            childRefsRef.current = Array(data.data.length).fill(0).map(() => React.createRef<any>())
             setCurrentIndex(data.data.length-1)
             currentIndexRef.current = data.data.length-1
             localStorage.setItem("animated","true")
-
         })
-    
     }, [])
 
     const childRefs = useMemo(
@@ -40,7 +37,6 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
           Array(cards.current.length)
             .fill(0)
             .map((i) => React.createRef<any>()),
-
         [cards.current]
       )
 
@@ -50,85 +46,84 @@ const Swipe: FC<Props> = ({children, ...rest}) => {
       }
 
       const canGoBack = currentIndex < cards.current.length-1
-
       const canSwipe = currentIndex >= 0
 
-      // set last direction and decrease current index
       const swiped = (direction:string, index:number) => {
             setLastDirection(direction)
             updateCurrentIndex(index - 1)
+            setShowSwipeHint(false)
       }
 
       const outOfFrame = (name:string, idx:number) => {
         console.log(`${name} (${idx}) left the screen!`, currentIndexRef.current)
-        // handle the case in which go back is pressed before card goes outOfFrame
         currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
-        // TODO: when quickly swipe and restore multiple times the same card,
-        // it happens multiple outOfFrame events are queued and the card disappear
-        // during latest swipes. Only the last outOfFrame event should be considered valid
       }
-    
 
-      const swipe = async (dir:string) => {
-        if (canSwipe && currentIndex < cards.current.length) {
-          await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
+      const swipe = useCallback(async (dir:string) => {
+        if (currentIndexRef.current >= 0 && currentIndexRef.current < cards.current.length) {
+          await childRefs[currentIndexRef.current]?.current?.swipe(dir)
         }
-      }
+      }, [childRefs])
 
-      const goBack = async () => {
-        if (!canGoBack) return
-        const newIndex = currentIndex + 1
+      const goBack = useCallback(async () => {
+        if (currentIndexRef.current >= cards.current.length - 1) return
+        const newIndex = currentIndexRef.current + 1
         updateCurrentIndex(newIndex)
-        await childRefs[newIndex].current.restoreCard()
-      }
+        await childRefs[newIndex]?.current?.restoreCard()
+      }, [childRefs])
+
+      // Register swipe controls with navbar
+      useEffect(() => {
+        setControls({
+          onSwipeLeft: () => swipe('left'),
+          onSwipeRight: () => swipe('right'),
+          onUndo: () => goBack(),
+        })
+        return () => setControls(null)
+      }, [swipe, goBack, setControls])
 
     return <div className="justify-content-center flex-column d-flex swipe-container" style={{justifyItems: 'center', alignItems: 'center'}} >
 
-                <div className='card-container'>
+                <div className={`card-container ${showSwipeHint && currentIndex >= 0 ? 'card-container-hint' : ''}`}>
                     {cards.current.map((card:any,i) => {
-                          return <TinderCard 
+                          return <TinderCard
                           ref={childRefs[i]}
                           key={card.attributes.name}
                           onSwipe={(dir) => swiped(dir, i)}
                           onCardLeftScreen={() => outOfFrame(card.attributes.name, i)}
                           preventSwipe={["up","down"]}
-                          className={(i==cards.current.length-1 && localStorage.getItem("animated") != "true") ? 'swipe animation_trigger':'swipe'}>
+                          className='swipe'>
                               <SwipeCard card={card}>
                               </SwipeCard>
                           </TinderCard>
-
-
-                        
                     })}
-                    
+
+                  {showSwipeHint && currentIndex >= 0 && (
+                    <div className="swipe-hint">
+                      <div className="swipe-hint-dot" />
+                    </div>
+                  )}
+
                   {(currentIndex == -1) &&
                     <div className='end-message-container'>
                       <div className='end-message'>
-                        <Button size="lg" variant='outline-dark' href='/'>Redo</Button> <hr></hr><Button size="lg" variant='outline-dark' href="/gallery">View Gallery</Button>
+                        <span className='end-message-emoji'>&#x1F38C;</span>
+                        <h3 className='end-message-title'>You've seen it all!</h3>
+                        <p className='end-message-subtitle'>Want another look?</p>
+                        <div className='end-message-actions'>
+                          <button className='end-btn end-btn-primary' onClick={() => window.location.reload()}>
+                            <ArrowCounterclockwise size={16} /> Start Over
+                          </button>
+                          <button className='end-btn end-btn-secondary' onClick={() => window.location.href = '/gallery'}>
+                            View Gallery
+                          </button>
+                        </div>
                       </div>
-                      
                     </div>
                   }
-                  
 
                 </div>
 
-                
-                
-                  
-                <div className='deck-container'>
-                    <div className="btn-container p-2 rounded deck d-flex justify-content-center">
-                        <Button variant="lightpink" className="btn-circle-xl m-1" onClick={() => swipe('left')}><ChevronDoubleLeft></ChevronDoubleLeft></Button>
-                        <span className="btn-spacer" ></span>
-                        <Button variant='lavenderblush' className="btn-circle-xl m-1" onClick={() => goBack()}><ArrowCounterclockwise></ArrowCounterclockwise></Button>
-                        <span className="btn-spacer" ></span>
-                        <Button variant="lightpink" className="btn-circle-xl m-1" onClick={() => swipe('right')}><ChevronDoubleRight></ChevronDoubleRight></Button>
-                    </div>
-                </div>
-                
-                    
-                   
-                
             </div>
 }
 

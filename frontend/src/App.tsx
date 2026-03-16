@@ -1,30 +1,34 @@
-import React, {useState} from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import './style.scss';
 import 'bootstrap/dist/css/bootstrap.css';
-import Card from './components/SwipeCard';
 import Navbar from './components/Navbar';
-import Swipe from './views/Swipe';
 import useAnimatePetal from "./custom/petal"
 import { Outlet } from "react-router-dom";
+import { SwipeControlsProvider, useSwipeControls } from './context/SwipeControlsContext';
 
-function App() {
-
+function AppInner() {
   useAnimatePetal()
+  const { controls } = useSwipeControls()
 
   return (
     <div className="App">
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <header>
-        <Navbar></Navbar>
+        <Navbar swipeControls={controls || undefined} />
       </header>
       <body>
-        <canvas style={{position:"absolute", backgroundImage: "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(203,202,202,1) 56%, rgba(106,106,106,1) 100%)",zIndex:-1}} ></canvas>
+        <canvas style={{position:"absolute", top:0, left:0, backgroundImage: "radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(203,202,202,1) 56%, rgba(106,106,106,1) 100%)",zIndex:-1}} ></canvas>
         <Outlet />
       </body>
     </div>
-    
+  );
+}
+
+function App() {
+  return (
+    <SwipeControlsProvider>
+      <AppInner />
+    </SwipeControlsProvider>
   );
 }
 
