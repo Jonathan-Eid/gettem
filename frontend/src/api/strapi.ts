@@ -84,9 +84,15 @@ export interface EngagementEventData {
     referrer?: string
 }
 
+const ANALYTICS_URL = process.env.REACT_APP_ANALYTICS_URL
+
 export async function postEngagementEvent(event: EngagementEventData) {
     try {
-        await strapi.post('/api/engagement-events', { data: event })
+        await fetch(`${ANALYTICS_URL}/ingest`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(event),
+        })
     } catch (error) {
         console.log('Analytics event failed:', error)
     }

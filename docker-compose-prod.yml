@@ -6,9 +6,10 @@ services:
   gettem:
     restart: always
     image: otacon900/gettem:latest
-    environment: 
+    environment:
       REACT_APP_STRAPI_URL: ${STRAPI_URL}
       REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
+      REACT_APP_ANALYTICS_URL: https://joneid.dev/api
     deploy:
       resources:
         limits:
@@ -93,9 +94,18 @@ services:
       DATABASE_SSL_MODE: disable
       AGGREGATION_INTERVAL: ${AGGREGATION_INTERVAL:-24h}
       RETENTION_DAYS: ${RETENTION_DAYS:-7}
+      INGEST_ADDR: ":8081"
     depends_on:
       - postgres
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ingest.rule=Host(`joneid.dev`) && PathPrefix(`/api/ingest`)"
+      - "traefik.http.routers.ingest.entrypoints=websecure"
+      - "traefik.http.routers.ingest.tls.certresolver=myresolver"
+      - "traefik.http.routers.ingest.middlewares=strip-api@docker"
+      - "traefik.http.middlewares.strip-api.stripprefix.prefixes=/api"
+      - "traefik.http.services.ingest.loadbalancer.server.port=8081"
 
   grafana:
     image: grafana/grafana:latest

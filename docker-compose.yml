@@ -5,9 +5,10 @@ services:
     build: 
       context: ./frontend
       dockerfile: Dockerfile.dev
-      args: 
+      args:
         REACT_APP_STRAPI_URL: ${STRAPI_URL}
         REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
+        REACT_APP_ANALYTICS_URL: ${ANALYTICS_URL:-http://localhost:8081}
     ports:
       - '3000:3000'
     volumes:
@@ -57,6 +58,8 @@ services:
     build:
       context: ./analytics
       dockerfile: cmd/operator/Dockerfile
+    ports:
+      - '8081:8081'
     environment:
       DATABASE_HOST: postgres
       DATABASE_PORT: 5432
@@ -66,6 +69,8 @@ services:
       DATABASE_SSL_MODE: disable
       AGGREGATION_INTERVAL: ${AGGREGATION_INTERVAL:-24h}
       RETENTION_DAYS: ${RETENTION_DAYS:-7}
+      INGEST_ADDR: ":8081"
+      CORS_ORIGINS: "http://localhost:3000"
     depends_on:
       - postgres
     restart: unless-stopped

@@ -72,8 +72,8 @@ func (c *PostgresClient) Create(ctx context.Context, id resource.Identifier, obj
 			(event_type, card_id, swipe_direction, dwell_time_ms, read_time_ms,
 			 scroll_depth, session_id, timestamp, user_agent, device_type,
 			 ip_address, screen_resolution, viewport_size, language, timezone, referrer,
-			 resource_version, uid, processed)
-		VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16, 1, gen_random_uuid(), false)
+			 resource_version, uid, processed, created_at)
+		VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16, 1, gen_random_uuid(), false, NOW())
 		RETURNING id, uid, resource_version, created_at,
 		          event_type, card_id, swipe_direction, dwell_time_ms, read_time_ms,
 		          scroll_depth, session_id, timestamp, user_agent, device_type,
@@ -307,7 +307,7 @@ func scanEvent(row *sql.Row) (*v1alpha1.EngagementEvent, error) {
 		id              int64
 		uid             string
 		resourceVersion int64
-		createdAt       time.Time
+		createdAt       sql.NullTime
 		spec            v1alpha1.Spec
 		processed       bool
 	)
@@ -324,7 +324,11 @@ func scanEvent(row *sql.Row) (*v1alpha1.EngagementEvent, error) {
 		return nil, err
 	}
 
-	return buildEvent(id, uid, resourceVersion, createdAt, spec, processed), nil
+	t := time.Time{}
+	if createdAt.Valid {
+		t = createdAt.Time
+	}
+	return buildEvent(id, uid, resourceVersion, t, spec, processed), nil
 }
 
 // scanEventFromRows scans from *sql.Rows (same columns as scanEvent).
@@ -333,7 +337,7 @@ func scanEventFromRows(rows *sql.Rows) (*v1alpha1.EngagementEvent, error) {
 		id              int64
 		uid             string
 		resourceVersion int64
-		createdAt       time.Time
+		createdAt       sql.NullTime
 		spec            v1alpha1.Spec
 		processed       bool
 	)
@@ -350,7 +354,11 @@ func scanEventFromRows(rows *sql.Rows) (*v1alpha1.EngagementEvent, error) {
 		return nil, err
 	}
 
-	return buildEvent(id, uid, resourceVersion, createdAt, spec, processed), nil
+	t := time.Time{}
+	if createdAt.Valid {
+		t = createdAt.Time
+	}
+	return buildEvent(id, uid, resourceVersion, t, spec, processed), nil
 }
 
 func buildEvent(id int64, uid string, rv int64, createdAt time.Time, spec v1alpha1.Spec, processed bool) *v1alpha1.EngagementEvent {
