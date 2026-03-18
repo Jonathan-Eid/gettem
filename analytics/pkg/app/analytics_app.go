@@ -104,8 +104,6 @@ func (a *AnalyticsApp) CallCustomRoute(ctx context.Context, w sdkapp.CustomRoute
 		handleVisitors(ctx, a.db, w)
 	case "pages":
 		handlePages(ctx, a.db, w)
-	case "ingest":
-		handleIngest(ctx, a, w, req)
 	default:
 		return sdkapp.ErrCustomRouteNotFound
 	}
