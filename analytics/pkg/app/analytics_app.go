@@ -13,9 +13,9 @@ import (
 	sdkapp "github.com/grafana/grafana-app-sdk/app"
 	"github.com/grafana/grafana-app-sdk/health"
 	"github.com/grafana/grafana-app-sdk/resource"
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
-	"github.com/prometheus/client_golang/prometheus"
 	v1alpha1 "github.com/wetcat/gettem/analytics/pkg/generated/engagementevent/v1alpha1"
 	"github.com/wetcat/gettem/analytics/pkg/store"
 )
@@ -110,17 +110,9 @@ func (a *AnalyticsApp) CallCustomRoute(ctx context.Context, w sdkapp.CustomRoute
 	return nil
 }
 
-// ── metrics.Provider ──────────────────────────────────────────────────────────
 
-func (a *AnalyticsApp) PrometheusCollectors() []prometheus.Collector {
-	return nil // extensible: add request duration histograms here
-}
-
-// ── health.Checker ────────────────────────────────────────────────────────────
-
-func (a *AnalyticsApp) HealthChecks() []health.Check {
-	return []health.Check{&dbHealthCheck{db: a.db}}
-}
+func (a *AnalyticsApp) PrometheusCollectors() []prometheus.Collector { return nil }
+func (a *AnalyticsApp) HealthChecks() []health.Check                { return nil }
 
 // ── accessors ─────────────────────────────────────────────────────────────────
 
