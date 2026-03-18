@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import useAnimatePetal from "./custom/petal"
 import { Outlet } from "react-router-dom";
 import { SwipeControlsProvider, useSwipeControls } from './context/SwipeControlsContext';
+import { AnalyticsProvider } from './context/AnalyticsContext';
 
 function AppInner() {
   useAnimatePetal()
@@ -26,9 +27,11 @@ function AppInner() {
 
 function App() {
   return (
-    <SwipeControlsProvider>
-      <AppInner />
-    </SwipeControlsProvider>
+    <AnalyticsProvider>
+      <SwipeControlsProvider>
+        <AppInner />
+      </SwipeControlsProvider>
+    </AnalyticsProvider>
   );
 }
 

@@ -1,0 +1,90 @@
+{
+  "kind": "collectionType",
+  "collectionName": "engagement_events",
+  "info": {
+    "singularName": "engagement-event",
+    "pluralName": "engagement-events",
+    "displayName": "EngagementEvent",
+    "description": "Tracks user engagement events on the Gettem card-swiping interface"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "eventType": {
+      "type": "enumeration",
+      "enum": [
+        "card_impression",
+        "swipe",
+        "detail_open",
+        "detail_close",
+        "undo",
+        "session_start",
+        "session_end",
+        "page_view",
+        "link_click"
+      ],
+      "required": true
+    },
+    "cardId": {
+      "type": "string"
+    },
+    "swipeDirection": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "right"
+      ]
+    },
+    "dwellTimeMs": {
+      "type": "integer",
+      "default": 0
+    },
+    "readTimeMs": {
+      "type": "integer",
+      "default": 0
+    },
+    "scrollDepth": {
+      "type": "float",
+      "default": 0.0
+    },
+    "sessionId": {
+      "type": "string",
+      "required": true
+    },
+    "timestamp": {
+      "type": "datetime",
+      "required": true
+    },
+    "userAgent": {
+      "type": "text"
+    },
+    "deviceType": {
+      "type": "enumeration",
+      "enum": [
+        "mobile",
+        "tablet",
+        "desktop"
+      ]
+    },
+    "ipAddress": {
+      "type": "string"
+    },
+    "screenResolution": {
+      "type": "string"
+    },
+    "viewportSize": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "timezone": {
+      "type": "string"
+    },
+    "referrer": {
+      "type": "text"
+    }
+  }
+}

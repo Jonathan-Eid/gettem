@@ -66,3 +66,29 @@ export async function getGithub() {
 
 }
 
+export interface EngagementEventData {
+    eventType: 'card_impression' | 'swipe' | 'detail_open' | 'detail_close' | 'undo' | 'session_start' | 'session_end' | 'page_view' | 'link_click'
+    cardId?: string
+    swipeDirection?: 'left' | 'right'
+    dwellTimeMs?: number
+    readTimeMs?: number
+    scrollDepth?: number
+    sessionId: string
+    timestamp: string
+    userAgent?: string
+    deviceType?: 'mobile' | 'tablet' | 'desktop'
+    screenResolution?: string
+    viewportSize?: string
+    language?: string
+    timezone?: string
+    referrer?: string
+}
+
+export async function postEngagementEvent(event: EngagementEventData) {
+    try {
+        await strapi.post('/api/engagement-events', { data: event })
+    } catch (error) {
+        console.log('Analytics event failed:', error)
+    }
+}
+

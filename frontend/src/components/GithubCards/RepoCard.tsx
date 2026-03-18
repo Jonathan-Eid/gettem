@@ -7,7 +7,8 @@ interface Props {
     user: any,
     repo: any,
     children?: any,
-    style?: React.CSSProperties
+    style?: React.CSSProperties,
+    onLinkClick?: (label: string) => void
 }
 
 const RepoCard: FC<Props> = ({children, ...props}) => {
@@ -37,7 +38,8 @@ const RepoCard: FC<Props> = ({children, ...props}) => {
   }, [props.repo])
 
   return (
-    <a className="repo-card" href={`https://github.com/${props.user}/${props.repo}`} target="_blank" rel="noopener noreferrer">
+    <a className="repo-card" href={`https://github.com/${props.user}/${props.repo}`} target="_blank" rel="noopener noreferrer"
+       onClick={() => props.onLinkClick?.(`repo:${props.repo}`)}>
       <div className="repo-card-header">
         <span className="repo-card-name">{props.repo}</span>
         {language && <span className="repo-card-lang">{language}</span>}

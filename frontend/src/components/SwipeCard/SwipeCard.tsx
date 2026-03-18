@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useRef, useCallback } from 'react'
 import Card from 'react-bootstrap/Card'
 import Modal from 'react-bootstrap/Modal'
 import { InfoCircleFill } from 'react-bootstrap-icons'
@@ -8,6 +8,7 @@ import './SwipeCard.scss'
 import { STRAPI_URL } from '../../api/strapi'
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useAnalytics } from '../../context/AnalyticsContext'
 
 
 interface Props {
@@ -19,13 +20,43 @@ interface Props {
 const SwipeCard: FC<Props> = ({children, variant = 'swipe', ...props}) => {
 
   const [show, setShow] = React.useState(false);
+  const { trackEvent, markTime, elapsed } = useAnalytics()
+  const detailOpenTime = useRef<number>(0)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const maxScrollDepth = useRef<number>(0)
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    const cardId = String(props.card.id)
+    trackEvent({
+        eventType: 'detail_close',
+        cardId,
+        readTimeMs: elapsed(detailOpenTime.current),
+        scrollDepth: Math.round(maxScrollDepth.current * 100) / 100,
+    })
+    maxScrollDepth.current = 0
+    setShow(false)
+  };
   const handleShow = (e: React.MouseEvent | React.TouchEvent) => {
     e.stopPropagation();
     e.preventDefault();
+    detailOpenTime.current = markTime()
+    trackEvent({
+        eventType: 'detail_open',
+        cardId: String(props.card.id),
+    })
     setShow(true);
   }
+
+  const handleScroll = useCallback(() => {
+    if (!scrollRef.current) return
+    const el = scrollRef.current
+    const depth = el.scrollHeight > el.clientHeight
+        ? el.scrollTop / (el.scrollHeight - el.clientHeight)
+        : 1
+    if (depth > maxScrollDepth.current) {
+        maxScrollDepth.current = depth
+    }
+  }, [])
 
   const card = props.card.attributes
   const card_images = card.images.data
@@ -56,7 +87,7 @@ const SwipeCard: FC<Props> = ({children, variant = 'swipe', ...props}) => {
             </Card>
 
             <Modal dialogClassName="project-modal" show={show} onHide={handleClose} centered size="lg">
-              <Modal.Body className="project-modal-body">
+              <Modal.Body className="project-modal-body" ref={scrollRef} onScroll={handleScroll}>
                 <button className="modal-close-btn" onClick={handleClose} aria-label="Close">
                   &times;
                 </button>
