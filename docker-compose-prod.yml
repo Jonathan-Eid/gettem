@@ -105,12 +105,12 @@ services:
       GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: gettem-analytics-app
       GF_AUTH_ANONYMOUS_ENABLED: "true"
       GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
-      DATABASE_HOST: postgres
-      DATABASE_PORT: 5432
-      DATABASE_USERNAME: ${DB_USER}
-      DATABASE_PASSWORD: ${DB_PASS}
-      DATABASE_NAME: gettem
-      DATABASE_SSL_MODE: disable
+      GF_PLUGIN_GETTEM_ANALYTICS_APP_DATABASE_HOST: postgres
+      GF_PLUGIN_GETTEM_ANALYTICS_APP_DATABASE_PORT: "5432"
+      GF_PLUGIN_GETTEM_ANALYTICS_APP_DATABASE_USERNAME: ${DB_USER}
+      GF_PLUGIN_GETTEM_ANALYTICS_APP_DATABASE_PASSWORD: ${DB_PASS}
+      GF_PLUGIN_GETTEM_ANALYTICS_APP_DATABASE_NAME: gettem
+      GF_PLUGIN_GETTEM_ANALYTICS_APP_DATABASE_SSL_MODE: disable
     volumes:
       - ./analytics/plugin/dist:/var/lib/grafana/plugins/gettem-analytics-app
       - ./grafana-data:/var/lib/grafana
