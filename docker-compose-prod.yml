@@ -6,9 +6,10 @@ services:
   gettem:
     restart: always
     image: otacon900/gettem:latest
-    environment: 
+    environment:
       REACT_APP_STRAPI_URL: ${STRAPI_URL}
       REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
+      REACT_APP_ANALYTICS_URL: https://grafana.joneid.dev/api/plugins/gettem-analytics-app/resources
     deploy:
       resources:
         limits:

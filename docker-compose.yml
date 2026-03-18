@@ -5,9 +5,10 @@ services:
     build: 
       context: ./frontend
       dockerfile: Dockerfile.dev
-      args: 
+      args:
         REACT_APP_STRAPI_URL: ${STRAPI_URL}
         REACT_APP_STRAPI_AUTH_TOKEN: ${STRAPI_AUTH_TOKEN}
+        REACT_APP_ANALYTICS_URL: ${ANALYTICS_URL:-http://localhost:3001/api/plugins/gettem-analytics-app/resources}
     ports:
       - '3000:3000'
     volumes:
