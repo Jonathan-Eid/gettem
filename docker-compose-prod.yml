@@ -82,9 +82,7 @@ services:
 
 
   analytics-operator:
-    build:
-      context: ./analytics
-      dockerfile: cmd/operator/Dockerfile
+    image: otacon900/gettem-analytics-operator:latest
     container_name: "analytics-operator"
     environment:
       DATABASE_HOST: postgres
