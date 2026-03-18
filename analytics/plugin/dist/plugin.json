@@ -1,0 +1,78 @@
+{
+    "$schema": "https://raw.githubusercontent.com/grafana/grafana/main/docs/sources/developers/plugins/plugin.schema.json",
+    "type": "app",
+    "name": "Gettem Engagement Analytics",
+    "id": "gettem-analytics-app",
+    "metrics": true,
+    "backend": true,
+    "executable": "gpx_gettem-analytics-app",
+    "info": {
+        "description": "Track and visualize user engagement on the Gettem card-swiping portfolio",
+        "author": {
+            "name": "wetcat",
+            "url": ""
+        },
+        "keywords": [
+            "analytics",
+            "engagement",
+            "swipe",
+            "cards"
+        ],
+        "logos": {
+            "small": "img/logo.svg",
+            "large": "img/logo.svg"
+        },
+        "links": [],
+        "screenshots": [],
+        "version": "1.0.0",
+        "updated": "2026-03-18"
+    },
+    "includes": [
+        {
+            "name": "Overview",
+            "path": "/a/gettem-analytics-app/overview",
+            "type": "page",
+            "role": "Viewer",
+            "addToNav": true,
+            "defaultNav": true,
+            "icon": "dashboard"
+        },
+        {
+            "name": "Card Performance",
+            "path": "/a/gettem-analytics-app/cards",
+            "type": "page",
+            "role": "Viewer",
+            "addToNav": true,
+            "icon": "card-data"
+        },
+        {
+            "name": "Trends",
+            "path": "/a/gettem-analytics-app/trends",
+            "type": "page",
+            "role": "Viewer",
+            "addToNav": true,
+            "icon": "graph-bar"
+        },
+        {
+            "name": "Audience",
+            "path": "/a/gettem-analytics-app/audience",
+            "type": "page",
+            "role": "Viewer",
+            "addToNav": true,
+            "icon": "users-alt"
+        },
+        {
+            "name": "Pages & Links",
+            "path": "/a/gettem-analytics-app/pages",
+            "type": "page",
+            "role": "Viewer",
+            "addToNav": true,
+            "icon": "link"
+        }
+    ],
+    "dependencies": {
+        "grafanaDependency": ">=7.0.0",
+        "plugins": []
+    },
+    "buildMode": "production"
+}
