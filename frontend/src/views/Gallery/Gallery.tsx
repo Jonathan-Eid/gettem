@@ -3,6 +3,7 @@ import './Gallery.scss'
 import { getCardCategories, getCardsFromCategory } from '../../api/strapi'
 import { categoryToTitle } from '../../utils/utils'
 import SwipeCard from '../../components/SwipeCard'
+import { useAnalytics } from '../../context/AnalyticsContext'
 
 
 interface Props {
@@ -14,6 +15,15 @@ const Gallery: FC<Props> = ({children, ...rest}) => {
 
     const [categories, setCategories] : any = useState([])
     const [cardMapState, setCardMapState] : any  = useState()
+    const { trackEvent, markTime, elapsed } = useAnalytics()
+    const pageOpenTime = useRef(markTime())
+
+    useEffect(() => {
+        trackEvent({ eventType: 'page_view', cardId: 'gallery' })
+        return () => {
+            trackEvent({ eventType: 'page_view', cardId: 'gallery', dwellTimeMs: elapsed(pageOpenTime.current) })
+        }
+    }, [])
 
     useEffect( () => {
         (async () => {

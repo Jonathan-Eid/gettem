@@ -6,7 +6,8 @@ import { numberic } from '../../utils/utils'
 interface Props {
     user: any,
     children?: any,
-    style?: React.CSSProperties
+    style?: React.CSSProperties,
+    onLinkClick?: (label: string) => void
 }
 
 const ProfileCard: FC<Props> = ({children, ...props}) => {
@@ -32,22 +33,27 @@ const ProfileCard: FC<Props> = ({children, ...props}) => {
     <div className="profile-card">
       <div className="profile-card-banner" />
       <div className="profile-card-body">
-        <a className="profile-card-avatar" href={`https://github.com/${name}`} target='_blank' rel="noopener noreferrer">
+        <a className="profile-card-avatar" href={`https://github.com/${name}`} target='_blank' rel="noopener noreferrer"
+           onClick={() => props.onLinkClick?.('github:profile')}>
           <img src={`${avatar}&s=120`} alt={name} />
         </a>
         <h3 className="profile-card-name">
-          <a href={`https://github.com/${name}`} target="_blank" rel="noopener noreferrer">{name}</a>
+          <a href={`https://github.com/${name}`} target="_blank" rel="noopener noreferrer"
+             onClick={() => props.onLinkClick?.('github:profile')}>{name}</a>
         </h3>
         <div className="profile-card-stats">
-          <a className="profile-card-stat" href={`https://github.com/${name}?tab=repositories`} target="_blank" rel="noopener noreferrer">
+          <a className="profile-card-stat" href={`https://github.com/${name}?tab=repositories`} target="_blank" rel="noopener noreferrer"
+             onClick={() => props.onLinkClick?.('github:repos')}>
             <strong>{publicRepos}</strong>
             <span>Repos</span>
           </a>
-          <a className="profile-card-stat" href={`https://gist.github.com/${name}`} target="_blank" rel="noopener noreferrer">
+          <a className="profile-card-stat" href={`https://gist.github.com/${name}`} target="_blank" rel="noopener noreferrer"
+             onClick={() => props.onLinkClick?.('github:gists')}>
             <strong>{publicGists}</strong>
             <span>Gists</span>
           </a>
-          <a className="profile-card-stat" href={`https://github.com/${name}?tab=followers`} target='_blank' rel="noopener noreferrer">
+          <a className="profile-card-stat" href={`https://github.com/${name}?tab=followers`} target='_blank' rel="noopener noreferrer"
+             onClick={() => props.onLinkClick?.('github:followers')}>
             <strong>{followers}</strong>
             <span>Followers</span>
           </a>

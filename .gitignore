@@ -6,3 +6,6 @@ gettem.sh
 node_modules
 .playwright-mcp
 package*.json
+
+# Grafana persistent data
+grafana-data/

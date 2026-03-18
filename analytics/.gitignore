@@ -1,0 +1,11 @@
+# Compiled binaries
+operator
+target/
+vendor/
+
+# Go build cache
+*.exe
+*.test
+
+# Coverage
+coverage.out

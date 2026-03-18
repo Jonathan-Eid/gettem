@@ -52,4 +52,43 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     ports:
       - '5432:5432'
-  
+
+  analytics-operator:
+    build:
+      context: ./analytics
+      dockerfile: cmd/operator/Dockerfile
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: juna
+      DATABASE_PASSWORD: gettem
+      DATABASE_NAME: gettem
+      DATABASE_SSL_MODE: disable
+      AGGREGATION_INTERVAL: ${AGGREGATION_INTERVAL:-24h}
+      RETENTION_DAYS: ${RETENTION_DAYS:-7}
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    user: "472"
+    ports:
+      - '3001:3000'
+    environment:
+      GF_DEFAULT_APP_MODE: development
+      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: gettem-analytics-app
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+      GF_PLUGIN_GETTEM_ANALYTICS_APP_DATABASE_HOST: postgres
+      GF_PLUGIN_GETTEM_ANALYTICS_APP_DATABASE_PORT: "5432"
+      GF_PLUGIN_GETTEM_ANALYTICS_APP_DATABASE_USERNAME: juna
+      GF_PLUGIN_GETTEM_ANALYTICS_APP_DATABASE_PASSWORD: gettem
+      GF_PLUGIN_GETTEM_ANALYTICS_APP_DATABASE_NAME: gettem
+      GF_PLUGIN_GETTEM_ANALYTICS_APP_DATABASE_SSL_MODE: disable
+    volumes:
+      - ./analytics/plugin/dist:/var/lib/grafana/plugins/gettem-analytics-app
+      - ./grafana-data:/var/lib/grafana
+    depends_on:
+      - postgres
+    restart: unless-stopped

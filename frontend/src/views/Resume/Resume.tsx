@@ -1,8 +1,8 @@
-import React, {FC, useEffect, useState} from 'react'
+import React, {FC, useEffect, useRef, useState} from 'react'
 import { STRAPI_URL, getResume } from '../../api/strapi'
+import { useAnalytics } from '../../context/AnalyticsContext'
 
 interface Props {
-    // any props that come into the component
     children?: any
 }
 
@@ -10,14 +10,21 @@ interface Props {
 const Gallery: FC<Props> = ({children, ...rest}) => {
 
     const [resume, setResume] = useState<any>()
+    const { trackEvent, markTime, elapsed } = useAnalytics()
+    const pageOpenTime = useRef(markTime())
 
     useEffect(() => {
+        trackEvent({ eventType: 'page_view', cardId: 'resume' })
+        return () => {
+            trackEvent({ eventType: 'page_view', cardId: 'resume', dwellTimeMs: elapsed(pageOpenTime.current) })
+        }
+    }, [])
 
+    useEffect(() => {
         (async () => {
             const resume = await getResume()
             setResume(resume.data.attributes.document.data.attributes.url)
         })()
-        
     },[])
 
 

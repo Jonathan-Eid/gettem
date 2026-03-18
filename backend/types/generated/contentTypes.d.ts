@@ -817,6 +817,65 @@ export interface ApiCardCard extends Schema.CollectionType {
   };
 }
 
+export interface ApiEngagementEventEngagementEvent
+  extends Schema.CollectionType {
+  collectionName: 'engagement_events';
+  info: {
+    singularName: 'engagement-event';
+    pluralName: 'engagement-events';
+    displayName: 'EngagementEvent';
+    description: 'Tracks user engagement events on the Gettem card-swiping interface';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    eventType: Attribute.Enumeration<
+      [
+        'card_impression',
+        'swipe',
+        'detail_open',
+        'detail_close',
+        'undo',
+        'session_start',
+        'session_end',
+        'page_view',
+        'link_click'
+      ]
+    > &
+      Attribute.Required;
+    cardId: Attribute.String;
+    swipeDirection: Attribute.Enumeration<['left', 'right']>;
+    dwellTimeMs: Attribute.Integer & Attribute.DefaultTo<0>;
+    readTimeMs: Attribute.Integer & Attribute.DefaultTo<0>;
+    scrollDepth: Attribute.Float & Attribute.DefaultTo<0>;
+    sessionId: Attribute.String & Attribute.Required;
+    timestamp: Attribute.DateTime & Attribute.Required;
+    userAgent: Attribute.Text;
+    deviceType: Attribute.Enumeration<['mobile', 'tablet', 'desktop']>;
+    ipAddress: Attribute.String;
+    screenResolution: Attribute.String;
+    viewportSize: Attribute.String;
+    language: Attribute.String;
+    timezone: Attribute.String;
+    referrer: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::engagement-event.engagement-event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::engagement-event.engagement-event',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiGettemGettem extends Schema.CollectionType {
   collectionName: 'gettems';
   info: {
@@ -932,6 +991,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::card.card': ApiCardCard;
+      'api::engagement-event.engagement-event': ApiEngagementEventEngagementEvent;
       'api::gettem.gettem': ApiGettemGettem;
       'api::github.github': ApiGithubGithub;
       'api::resume.resume': ApiResumeResume;
